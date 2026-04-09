@@ -1,5 +1,6 @@
 * {
 	padding: 0;
+	cursor: none !important;
 	user-select: none;
 	font-family: var(--main-font);
 	color: var(--white);
@@ -27,6 +28,7 @@ canvas {
 }
 
 body {
+	cursor: none;
 	display: flex;
 	justify-content: center;
 	align-items: center;
