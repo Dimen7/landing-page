@@ -35,16 +35,40 @@
 
 	let birthdayDate = new Date(PUBLIC_BIRTHDAY);
 	let age = Math.floor((Date.now() - birthdayDate.getTime()) / 3.15576e10);
+
+	let hovered = false;
+	let mainEl: HTMLElement;
+	let imgEl: HTMLImageElement;
+
+	function onMouseMove(e: MouseEvent) {
+		if (!mainEl || !imgEl) return;
+		const target = document.elementFromPoint(e.clientX, e.clientY);
+		const overContent = mainEl.contains(target) || imgEl.contains(target) || target === imgEl;
+		const i = imgEl.getBoundingClientRect();
+		const overImgGap =
+			e.clientX >= i.left - 20 &&
+			e.clientX <= i.right + 20 &&
+			e.clientY >= i.top - 20 &&
+			e.clientY <= i.bottom + 20;
+		const inZone = overContent || overImgGap;
+		if (inZone !== hovered) {
+			hovered = inZone;
+			if (!inZone) scale.set(0);
+		}
+	}
 </script>
 
-<main>
+<svelte:window on:mousemove={onMouseMove} />
+
+<main class:hovered bind:this={mainEl}>
 	<!-- svelte-ignore a11y_mouse_events_have_key_events -->
 	<div id="rotating-image">
 		<img
+			bind:this={imgEl}
 			src={profileImageUrl}
 			alt={PUBLIC_NAME}
-			on:mouseover={() => scale.set(1.2)}
-			on:mouseleave={() => scale.set(0)}
+			on:mouseenter={() => !hovered && scale.set(1.2)}
+			on:mouseleave={() => !hovered && scale.set(0)}
 		/>
 	</div>
 	<div id="rotating-card">

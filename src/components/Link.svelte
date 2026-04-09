@@ -7,7 +7,7 @@
 
 <!-- svelte-ignore a11y_mouse_events_have_key_events -->
 <a
-	on:mouseover={() => scale.set(-0.6)}
+	on:mouseenter={() => scale.set(-0.6)}
 	on:mouseleave={() => scale.set(0)}
 	{href}
 	rel="noopener noreferrer"

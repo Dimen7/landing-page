@@ -59,7 +59,7 @@ main {
 	justify-content: right;
 	width: 400px;
 
-	&:hover {
+	&.hovered {
 		margin-right: 350px;
 
 		#card {
