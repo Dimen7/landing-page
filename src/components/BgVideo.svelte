@@ -2,36 +2,30 @@
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import { PUBLIC_BG_VIDEO_ID } from '$env/static/public';
-	import { videoPlaying } from '../store/bgvideo';
+	import { videoActive, videoPlaying, videoVolume } from '../store/bgvideo';
 
-	let active = false;
 	let iframeEl: HTMLIFrameElement;
-	let volume = 50;
 
 	function postCmd(func: string, args: unknown[] = []) {
 		iframeEl?.contentWindow?.postMessage(JSON.stringify({ event: 'command', func, args }), '*');
 	}
 
+	$: if ($videoActive) postCmd($videoPlaying ? 'playVideo' : 'pauseVideo');
+	$: if ($videoActive) postCmd('setVolume', [$videoVolume]);
+
 	function onScroll(e: WheelEvent) {
-		if (!active) return;
-		volume = Math.min(100, Math.max(0, volume - Math.sign(e.deltaY) * 5));
-		postCmd('setVolume', [volume]);
+		if (!$videoActive) return;
+		videoVolume.update((v) => Math.min(100, Math.max(0, v - Math.sign(e.deltaY) * 5)));
 	}
 
 	function onWindowClick(e: MouseEvent) {
 		if (!PUBLIC_BG_VIDEO_ID) return;
-		if ((e.target as Element).closest('a, button')) return;
-
-		if (!active) {
-			active = true;
+		if ((e.target as Element).closest('a, button, input')) return;
+		if (!$videoActive) {
+			videoActive.set(true);
 			videoPlaying.set(true);
-			setTimeout(() => postCmd('setVolume', [volume]), 1000);
-		} else if ($videoPlaying) {
-			postCmd('pauseVideo');
-			videoPlaying.set(false);
 		} else {
-			postCmd('playVideo');
-			videoPlaying.set(true);
+			videoPlaying.update((p) => !p);
 		}
 	}
 
@@ -44,7 +38,7 @@
 
 <svelte:window on:wheel={onScroll} />
 
-{#if PUBLIC_BG_VIDEO_ID && active}
+{#if PUBLIC_BG_VIDEO_ID && $videoActive}
 	<div id="bg-video" in:fade={{ duration: 2000 }}>
 		<iframe
 			bind:this={iframeEl}

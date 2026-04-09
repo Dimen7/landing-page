@@ -4,6 +4,7 @@
 	import { scale } from '../store/cursor';
 	import SocialLinks from '../components/SocialLinks.svelte';
 	import BgVideo from '../components/BgVideo.svelte';
+	import VideoControls from '../components/VideoControls.svelte';
 	import { videoPlaying } from '../store/bgvideo';
 	import defaultProfileImageUrl from '$lib/assets/avatar.svg';
 	import {
@@ -92,6 +93,12 @@
 		</div>
 	</div>
 </main>
+
+{#if $videoPlaying}
+	<div id="controls-anchor" transition:fly={{ x: -80, duration: 600, opacity: 0 }}>
+		<VideoControls />
+	</div>
+{/if}
 
 {#if $videoPlaying}
 	<footer transition:fly={{ y: 80, duration: 700, opacity: 0 }}>

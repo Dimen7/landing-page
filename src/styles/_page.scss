@@ -147,6 +147,21 @@ ul {
 	flex-direction: column;
 }
 
+#controls-anchor {
+	position: fixed;
+	left: 1.5rem;
+	top: 0;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	pointer-events: none;
+	z-index: 1;
+
+	> :global(*) {
+		pointer-events: auto;
+	}
+}
+
 footer {
 	position: fixed;
 	bottom: 1.5rem;
