@@ -5,6 +5,11 @@
 	color: var(--white);
 }
 
+img,
+svg {
+	-webkit-user-drag: none;
+}
+
 a {
 	text-decoration: none;
 	color: var(--highlight);

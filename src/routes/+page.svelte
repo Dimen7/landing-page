@@ -65,6 +65,7 @@
 	<div id="rotating-image">
 		<img
 			bind:this={imgEl}
+			draggable="false"
 			src={profileImageUrl}
 			alt={PUBLIC_NAME}
 			on:mouseenter={() => !hovered && scale.set(1.2)}

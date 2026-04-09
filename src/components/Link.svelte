@@ -9,6 +9,8 @@
 <a
 	on:mouseenter={() => scale.set(-0.6)}
 	on:mouseleave={() => scale.set(0)}
+	on:dragstart|preventDefault
+	draggable="false"
 	{href}
 	rel="noopener noreferrer"
 	target={newTab ? '_blank' : '_self'}
