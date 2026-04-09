@@ -16,12 +16,6 @@
 	</Link>
 </div>
 
-<style>
-	div {
-		transition: all 0.1s ease-out;
-
-		&:hover {
-			transform: scale(1.3);
-		}
-	}
+<style lang="scss">
+	@use '../styles/social' as *;
 </style>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff0052" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#ff0052" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="400" fill="#070707" rx="20"/>
+
+  <!-- Center glow -->
+  <circle cx="200" cy="200" r="180" fill="url(#glow)"/>
+
+  <!-- Outer ring -->
+  <circle cx="200" cy="200" r="172" fill="none" stroke="#ff0052" stroke-width="0.6" opacity="0.25"/>
+
+  <!-- Rotated squares -->
+  <rect x="90" y="90" width="220" height="220" fill="none" stroke="#ff0052" stroke-width="1.2" opacity="0.45"/>
+  <rect x="90" y="90" width="220" height="220" fill="none" stroke="#ff0052" stroke-width="0.8" opacity="0.25" transform="rotate(45 200 200)"/>
+
+  <!-- Axis lines -->
+  <line x1="200" y1="15"  x2="200" y2="385" stroke="#cccccc" stroke-width="0.4" opacity="0.07"/>
+  <line x1="15"  y1="200" x2="385" y2="200" stroke="#cccccc" stroke-width="0.4" opacity="0.07"/>
+
+  <!-- Diagonal lines -->
+  <line x1="55"  y1="55"  x2="345" y2="345" stroke="#ff0052" stroke-width="0.5" opacity="0.12"/>
+  <line x1="345" y1="55"  x2="55"  y2="345" stroke="#ff0052" stroke-width="0.5" opacity="0.12"/>
+
+  <!-- Inner accent ring -->
+  <circle cx="200" cy="200" r="54" fill="none" stroke="#ff0052" stroke-width="1.8" opacity="0.75"/>
+  <circle cx="200" cy="200" r="52" fill="#0b0002"/>
+
+  <!-- Center glow dot -->
+  <circle cx="200" cy="200" r="14" fill="#ff0052" filter="url(#soft)" opacity="0.55"/>
+  <circle cx="200" cy="200" r="5"  fill="#ff0052"/>
+
+  <!-- Corner marks -->
+  <circle cx="88"  cy="88"  r="3" fill="#ff0052" opacity="0.35"/>
+  <circle cx="312" cy="88"  r="3" fill="#ff0052" opacity="0.35"/>
+  <circle cx="88"  cy="312" r="3" fill="#ff0052" opacity="0.35"/>
+  <circle cx="312" cy="312" r="3" fill="#ff0052" opacity="0.35"/>
+
+  <!-- Initials -->
+  <text x="200" y="212" font-family="Arial Black, sans-serif" font-weight="900"
+        font-size="34" fill="#cccccc" text-anchor="middle" letter-spacing="5" opacity="0.9">D7</text>
+</svg>

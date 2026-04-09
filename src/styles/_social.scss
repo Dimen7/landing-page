@@ -1,0 +1,7 @@
+div {
+	transition: all 0.1s ease-out;
+
+	&:hover {
+		transform: scale(1.3);
+	}
+}

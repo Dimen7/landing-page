@@ -1,0 +1,17 @@
+.pointer {
+	pointer-events: none;
+	height: 40px;
+	width: 40px;
+	background-color: rgb(255, 255, 255);
+	transition: 0.3s transform cubic-bezier(0, 0.68, 0.43, 1.02);
+	mix-blend-mode: difference;
+	border-radius: 100%;
+	position: fixed;
+	z-index: 2;
+	left: 50%;
+	top: 50%;
+
+	@media (pointer: coarse) {
+		display: none;
+	}
+}

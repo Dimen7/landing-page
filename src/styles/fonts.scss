@@ -3,7 +3,7 @@
 	font-family: 'Roboto Regular';
 	font-style: normal;
 	font-weight: 400;
-	src: url('../../../../fonts/roboto-regular.ttf');
+	src: url('../lib/assets/roboto-regular.ttf');
 }
 
 @font-face {
@@ -11,5 +11,5 @@
 	font-family: 'Roboto Flex';
 	font-style: normal;
 	font-weight: 900;
-	src: url('../../../../fonts/roboto-flex-variable.ttf') format('woff2');
+	src: url('../lib/assets/roboto-flex-variable.ttf') format('woff2');
 }

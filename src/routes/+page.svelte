@@ -1,17 +1,7 @@
 <script lang="ts">
-	import Fa from 'svelte-fa';
 	import { scale } from '../store/cursor';
-	import { faKey, faUserAlt } from '@fortawesome/free-solid-svg-icons';
-	import { faEnvelope, faChessKnight, faGamepad } from '@fortawesome/free-solid-svg-icons';
-	import {
-		faDiscord,
-		faGithub,
-		faReddit,
-		faTelegramPlane,
-		faTwitter,
-		faYoutube
-	} from '@fortawesome/free-brands-svg-icons';
 	import SocialLinks from '../components/SocialLinks.svelte';
+	import defaultProfileImageUrl from '$lib/assets/avatar.svg';
 	import {
 		PUBLIC_NAME,
 		PUBLIC_LOCALE,
@@ -23,6 +13,8 @@
 		PUBLIC_IMAGE
 	} from '$env/static/public';
 
+	const profileImageUrl = PUBLIC_IMAGE || defaultProfileImageUrl;
+
 	let time = new Date().toLocaleTimeString(PUBLIC_LOCALE, {
 		timeZone: PUBLIC_TIMEZONE,
 		hour: '2-digit',
@@ -31,45 +23,13 @@
 
 	let birthdayDate = new Date(PUBLIC_BIRTHDAY);
 	let age = Math.floor((Date.now() - birthdayDate.getTime()) / 3.15576e10);
-
-	// Magnetic logo variables
-	let magnetX = 0;
-	let magnetY = 0;
-	const MAGNET_THRESHOLD = 220; // px
-	const MAGNET_MAX = 14; // max translate in px
-
-	function handleMagnetMove(e: MouseEvent) {
-		const target = e.currentTarget as HTMLElement;
-		if (!target) return;
-		const rect = target.getBoundingClientRect();
-		const cx = rect.left + rect.width / 2;
-		const cy = rect.top + rect.height / 2;
-		const dx = e.clientX - cx;
-		const dy = e.clientY - cy;
-		const dist = Math.hypot(dx, dy);
-		if (dist < MAGNET_THRESHOLD) {
-			const strength = (1 - dist / MAGNET_THRESHOLD) * MAGNET_MAX;
-			const nx = dx / (dist || 1);
-			const ny = dy / (dist || 1);
-			magnetX = nx * strength;
-			magnetY = ny * strength;
-		} else {
-			magnetX = 0;
-			magnetY = 0;
-		}
-	}
-
-	function handleMagnetLeave() {
-		magnetX = 0;
-		magnetY = 0;
-	}
 </script>
 
 <main>
 	<!-- svelte-ignore a11y_mouse_events_have_key_events -->
 	<div id="rotating-image">
 		<img
-			src={PUBLIC_IMAGE}
+			src={profileImageUrl}
 			alt={PUBLIC_NAME}
 			on:mouseover={() => scale.set(1.2)}
 			on:mouseleave={() => scale.set(0)}
@@ -92,151 +52,5 @@
 </main>
 
 <style lang="scss">
-	h1,
-	p {
-		margin: 0;
-	}
-
-	#card {
-		animation: float 2.9s ease-in-out infinite;
-		animation-delay: 3s;
-		transition: all 0.6s;
-	}
-
-	#rotating-image {
-		z-index: 1;
-	}
-	img {
-		cursor: pointer;
-		width: 400px;
-		border-radius: 20px;
-		transition: all 0.6s;
-
-		&:hover {
-			filter: brightness(1.3);
-		}
-
-		animation: float 3s ease-in-out infinite;
-
-		position: fixed;
-		margin-left: -80px;
-		transform: rotate(4deg);
-		margin-top: -50px;
-	}
-
-	@keyframes float {
-		0% {
-			transform: translatey(0px);
-		}
-		50% {
-			transform: translatey(-10px);
-		}
-		100% {
-			transform: translatey(0px);
-		}
-	}
-
-	#rotating-card {
-		transform: rotate(-4deg) skewX(5deg) skewY(-5deg);
-		transition: all 0.6s;
-	}
-
-	#rotating-image {
-		transform: rotate(4deg);
-		transition: all 0.6s;
-	}
-	main {
-		transition: all 0.6s;
-		display: flex;
-		justify-content: right;
-		width: 400px;
-
-		&:hover {
-			margin-right: 350px;
-			#card {
-				filter: none;
-				opacity: 1;
-				margin-right: -330px;
-			}
-			#rotating-card {
-				transform: rotate(6deg) scale(1.1);
-			}
-
-			img {
-				filter: blur(5px) saturate(10) brightness(0.6);
-				margin-left: -450px;
-			}
-			#rotating-image {
-				transform: rotate(-6deg) translateY(-50px) scale(0.9);
-			}
-		}
-	}
-
-	ul {
-		gap: 1rem;
-		flex-wrap: wrap;
-		margin: 0;
-		font-size: 2rem;
-		display: flex;
-		list-style: none;
-	}
-
-	#card {
-		gap: 1rem;
-		display: flex;
-		justify-content: center;
-		flex-direction: row;
-		border-radius: 15px;
-		padding: 2rem;
-		backdrop-filter: blur(32px);
-		filter: blur(5px) saturate(10) grayscale(1);
-		opacity: 0.4;
-
-		background: #1313138f;
-		min-width: 300px;
-		max-width: 300px;
-		flex-direction: column;
-
-		// Mobile
-		@media (max-width: 505px) {
-		}
-	}
-
-	@media (max-width: 505px) {
-		img {
-			margin: 0 !important;
-			position: relative;
-			transform: none !important;
-			width: 100%;
-			filter: none !important;
-		}
-
-		#card {
-			filter: none !important;
-			opacity: 1;
-			animation: none;
-			min-width: none;
-			max-width: none;
-			background: none;
-			margin: 0 !important;
-		}
-
-		main {
-			padding: 1rem;
-			align-items: center;
-			flex-direction: column;
-			border-radius: 0;
-			width: initial !important;
-			min-width: none;
-			max-width: none;
-			margin: 0 !important;
-			transform: none !important;
-			justify-content: flex-start;
-		}
-
-		#rotating-card,
-		#rotating-image {
-			transform: rotate(0deg) skewX(0deg) skewY(0deg) !important;
-		}
-	}
+	@use '../styles/page' as *;
 </style>

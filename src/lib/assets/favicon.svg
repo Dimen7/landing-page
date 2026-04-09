@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background -->
+  <rect width="100" height="100" fill="#070707" rx="12"/>
+
+  <!-- Subtle corner marks -->
+  <rect x="8" y="8" width="84" height="84" fill="none" stroke="#ff0052" stroke-width="1.2" opacity="0.4" rx="6"/>
+
+  <!-- D7 -->
+  <text x="50" y="69" font-family="Arial Black, sans-serif" font-weight="900"
+        font-size="52" fill="#ff0052" text-anchor="middle" letter-spacing="-1">D7</text>
+</svg>

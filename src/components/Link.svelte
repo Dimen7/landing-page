@@ -16,11 +16,6 @@
 	<slot />
 </a>
 
-<style>
-	a {
-		transition: all 0.1s ease-out;
-		&:hover {
-			color: var(--white);
-		}
-	}
+<style lang="scss">
+	@use '../styles/link' as *;
 </style>

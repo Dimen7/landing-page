@@ -34,23 +34,23 @@ void main() {
 	
 	vec2 mouse = u_mouse * scale;
 	vec2 ps = vec2(1.0) / u_resolution.xy;
-	vec2 sample = gl_FragCoord.xy / u_resolution.xy;
+	vec2 sampleCoord = gl_FragCoord.xy / u_resolution.xy;
 	vec2 o = mouse*.2+vec2(.65, .5);
 	float d = .98;
 
-	sample = d * (sample - o);
-	sample += o;
-	sample += vec2(sin((u_time+uv.y * .5)*10.)*.001, -.00);
+	sampleCoord = d * (sampleCoord - o);
+	sampleCoord += o;
+	sampleCoord += vec2(sin((u_time+uv.y * .5)*10.)*.001, -.00);
 	vec3 fragcolour;
 	vec4 tex;
 
 	if (u_renderpass) {
-		tex = texture2D(u_buffer, sample) * 0.8;
+		tex = texture2D(u_buffer, sampleCoord) * 0.8;
 
 		float df = length(mouse - uv);
 		fragcolour = vec3(smoothstep(circleSize, 0., df));
 	} else {
-		tex = texture2D(u_buffer, sample, 2.) * .98;
+		tex = texture2D(u_buffer, sampleCoord, 2.) * .98;
 		tex = vec4(
 			smoothstep(0.0, threshold - fwidth(tex.x), tex.x),
 			smoothstep(0.2, threshold - fwidth(tex.y) + .2, tex.y),
