@@ -2,32 +2,43 @@
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import { PUBLIC_BG_VIDEO_ID } from '$env/static/public';
+	import { videoPlaying } from '../store/bgvideo';
 
 	let active = false;
 	let iframeEl: HTMLIFrameElement;
 	let volume = 50;
 
-	function setVolume(v: number) {
-		iframeEl?.contentWindow?.postMessage(
-			JSON.stringify({ event: 'command', func: 'setVolume', args: [v] }),
-			'*'
-		);
+	function postCmd(func: string, args: unknown[] = []) {
+		iframeEl?.contentWindow?.postMessage(JSON.stringify({ event: 'command', func, args }), '*');
 	}
 
 	function onScroll(e: WheelEvent) {
 		if (!active) return;
 		volume = Math.min(100, Math.max(0, volume - Math.sign(e.deltaY) * 5));
-		setVolume(volume);
+		postCmd('setVolume', [volume]);
+	}
+
+	function onWindowClick(e: MouseEvent) {
+		if (!PUBLIC_BG_VIDEO_ID) return;
+		if ((e.target as Element).closest('a, button')) return;
+
+		if (!active) {
+			active = true;
+			videoPlaying.set(true);
+			setTimeout(() => postCmd('setVolume', [volume]), 1000);
+		} else if ($videoPlaying) {
+			postCmd('pauseVideo');
+			videoPlaying.set(false);
+		} else {
+			postCmd('playVideo');
+			videoPlaying.set(true);
+		}
 	}
 
 	onMount(() => {
 		if (!PUBLIC_BG_VIDEO_ID) return;
-		const handler = () => {
-			active = true;
-			window.removeEventListener('click', handler);
-		};
-		window.addEventListener('click', handler);
-		return () => window.removeEventListener('click', handler);
+		window.addEventListener('click', onWindowClick);
+		return () => window.removeEventListener('click', onWindowClick);
 	});
 </script>
 

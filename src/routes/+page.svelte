@@ -3,6 +3,7 @@
 	import { scale } from '../store/cursor';
 	import SocialLinks from '../components/SocialLinks.svelte';
 	import BgVideo from '../components/BgVideo.svelte';
+	import { videoPlaying } from '../store/bgvideo';
 	import defaultProfileImageUrl from '$lib/assets/avatar.svg';
 	import {
 		PUBLIC_NAME,
@@ -63,7 +64,7 @@
 
 <BgVideo />
 
-<main class:hovered bind:this={mainEl}>
+<main class:hovered class:video-playing={$videoPlaying} bind:this={mainEl}>
 	<!-- svelte-ignore a11y_mouse_events_have_key_events -->
 	<div id="rotating-image">
 		<img
@@ -75,7 +76,7 @@
 			on:mouseleave={() => !hovered && scale.set(0)}
 		/>
 	</div>
-	<div id="rotating-card">
+	<div id="rotating-card" class:hidden={$videoPlaying}>
 		<div id="card">
 			<h1>{PUBLIC_NAME}</h1>
 			<p>
