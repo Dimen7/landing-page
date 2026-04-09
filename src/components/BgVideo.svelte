@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
-	import { PUBLIC_BG_VIDEO_ID } from '$env/static/public';
+	import { PUBLIC_BG_VIDEO_ID, PUBLIC_BG_VIDEO_BLUR } from '$env/static/public';
 	import { videoActive, videoPlaying, videoVolume } from '../store/bgvideo';
 
 	let iframeEl: HTMLIFrameElement;
@@ -39,7 +39,7 @@
 <svelte:window on:wheel={onScroll} />
 
 {#if PUBLIC_BG_VIDEO_ID && $videoActive}
-	<div id="bg-video" in:fade={{ duration: 2000 }}>
+	<div id="bg-video" in:fade={{ duration: 2000 }} style="--video-blur: {Number(PUBLIC_BG_VIDEO_BLUR) || 8}px">
 		<iframe
 			bind:this={iframeEl}
 			src="https://www.youtube-nocookie.com/embed/{PUBLIC_BG_VIDEO_ID}?autoplay=1&mute=0&loop=1&playlist={PUBLIC_BG_VIDEO_ID}&controls=0&rel=0&modestbranding=1&iv_load_policy=3&enablejsapi=1"
@@ -70,7 +70,7 @@
 			min-height: 100vh;
 			min-width: 177.78vh;
 			border: none;
-			filter: blur(8px);
+			filter: blur(var(--video-blur, 8px));
 		}
 	}
 </style>
