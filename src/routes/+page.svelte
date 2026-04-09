@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { fly } from 'svelte/transition';
 	import { scale } from '../store/cursor';
 	import SocialLinks from '../components/SocialLinks.svelte';
 	import BgVideo from '../components/BgVideo.svelte';
@@ -91,6 +92,19 @@
 		</div>
 	</div>
 </main>
+
+{#if $videoPlaying}
+	<footer transition:fly={{ y: 80, duration: 700, opacity: 0 }}>
+		<span id="footer-name">{PUBLIC_NAME}</span>
+		<span id="footer-time">
+			{time} &middot; {PUBLIC_LOCATION}
+		</span>
+		<span id="footer-bio">{age} {PUBLIC_AGE_SUFFIX} &middot; {PUBLIC_BIO}</span>
+		<ul>
+			<SocialLinks />
+		</ul>
+	</footer>
+{/if}
 
 <style lang="scss">
 	@use '../styles/page' as *;

@@ -31,6 +31,15 @@ img {
 	margin-top: -50px;
 }
 
+@keyframes cd-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
 @keyframes float {
 	0% {
 		transform: translatey(0px);
@@ -71,7 +80,18 @@ main {
 	width: 400px;
 
 	&.video-playing {
-		transform: translateX(-40vw) translateY(36vh) scale(0.45) rotate(-2deg);
+		transform: translateX(-40vw) translateY(26vh) scale(0.45);
+
+		#rotating-image {
+			transform: none;
+		}
+
+		img {
+			border-radius: 50%;
+			animation: cd-spin 4s linear infinite;
+			margin-left: 0;
+			margin-top: 0;
+		}
 
 		&.hovered {
 			margin-right: 0;
@@ -125,6 +145,54 @@ ul {
 	min-width: 300px;
 	max-width: 300px;
 	flex-direction: column;
+}
+
+footer {
+	position: fixed;
+	bottom: 1.5rem;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	gap: 2rem;
+	padding: 1rem 2rem;
+	background: #1313138f;
+	backdrop-filter: blur(32px);
+	border-radius: 15px;
+	border: 1px solid rgba(255, 255, 255, 0.06);
+	box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+	max-width: 90vw;
+
+	#footer-name {
+		font-family: var(--highlight-font);
+		font-weight: 900;
+		font-size: 1.1rem;
+		letter-spacing: 0.15rem;
+		white-space: nowrap;
+	}
+
+	#footer-time {
+		font-size: 0.85rem;
+		opacity: 0.6;
+		white-space: nowrap;
+	}
+
+	#footer-bio {
+		font-size: 0.8rem;
+		opacity: 0.5;
+		flex: 1;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	ul {
+		font-size: 1.2rem;
+		gap: 1.2rem;
+		flex-shrink: 0;
+		margin: 0;
+	}
 }
 
 @media (max-width: 505px) {
