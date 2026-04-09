@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { scale } from '../store/cursor';
 	import SocialLinks from '../components/SocialLinks.svelte';
 	import defaultProfileImageUrl from '$lib/assets/avatar.svg';
@@ -15,10 +16,21 @@
 
 	const profileImageUrl = PUBLIC_IMAGE || defaultProfileImageUrl;
 
-	let time = new Date().toLocaleTimeString(PUBLIC_LOCALE, {
-		timeZone: PUBLIC_TIMEZONE,
-		hour: '2-digit',
-		minute: '2-digit'
+	const formatTime = () =>
+		new Date().toLocaleTimeString(PUBLIC_LOCALE, {
+			timeZone: PUBLIC_TIMEZONE,
+			hour: '2-digit',
+			minute: '2-digit',
+			second: '2-digit'
+		});
+
+	let time = formatTime();
+
+	onMount(() => {
+		const interval = setInterval(() => {
+			time = formatTime();
+		}, 1000);
+		return () => clearInterval(interval);
 	});
 
 	let birthdayDate = new Date(PUBLIC_BIRTHDAY);
