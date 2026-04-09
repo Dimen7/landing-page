@@ -2,7 +2,8 @@ if (window.innerWidth > 500) {
 	let camera, scene, renderer;
 	let uniforms;
 
-	let divisor = 1 / 5;
+	let divisor = window.CURSOR_CONFIG?.divisor || 1 / 5;
+	let noiseUrl = window.CURSOR_CONFIG?.noiseUrl || 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/982762/noise.png';
 
 	let loader = new THREE.TextureLoader();
 	let texture, rtTexture, rtTexture2;
@@ -13,7 +14,7 @@ if (window.innerWidth > 500) {
 	};
 
 	loader.setCrossOrigin('anonymous');
-	loader.load('https://s3-us-west-2.amazonaws.com/s.cdpn.io/982762/noise.png', async (tex) => {
+	loader.load(noiseUrl, async (tex) => {
 		texture = tex;
 		texture.wrapS = THREE.RepeatWrapping;
 		texture.wrapT = THREE.RepeatWrapping;

@@ -11,17 +11,26 @@
 		faTwitter,
 		faYoutube
 	} from '@fortawesome/free-brands-svg-icons';
-	import Social from '../components/Social.svelte';
-	import Link from '../components/Link.svelte';
+	import SocialLinks from '../components/SocialLinks.svelte';
+	import {
+		PUBLIC_NAME,
+		PUBLIC_LOCALE,
+		PUBLIC_TIMEZONE,
+		PUBLIC_LOCATION,
+		PUBLIC_BIRTHDAY,
+		PUBLIC_AGE_SUFFIX,
+		PUBLIC_BIO,
+		PUBLIC_IMAGE
+	} from '$env/static/public';
 
-	let time = new Date().toLocaleTimeString('de-DE', {
-		timeZone: 'Europe/Berlin',
+	let time = new Date().toLocaleTimeString(PUBLIC_LOCALE, {
+		timeZone: PUBLIC_TIMEZONE,
 		hour: '2-digit',
 		minute: '2-digit'
 	});
 
-	let birthday = new Date(2002, 2, 15);
-	let age = Math.floor((Date.now() - birthday.getTime()) / 3.15576e10);
+	let birthdayDate = new Date(PUBLIC_BIRTHDAY);
+	let age = Math.floor((Date.now() - birthdayDate.getTime()) / 3.15576e10);
 
 	// Magnetic logo variables
 	let magnetX = 0;
@@ -60,36 +69,23 @@
 	<!-- svelte-ignore a11y_mouse_events_have_key_events -->
 	<div id="rotating-image">
 		<img
-			src="osumatrix.webp"
-			alt="oSumAtrIX"
+			src={PUBLIC_IMAGE}
+			alt={PUBLIC_NAME}
 			on:mouseover={() => scale.set(1.2)}
 			on:mouseleave={() => scale.set(0)}
 		/>
 	</div>
 	<div id="rotating-card">
 		<div id="card">
-			<h1>oSumAtrIX</h1>
+			<h1>{PUBLIC_NAME}</h1>
 			<p>
-				It is <b>{time}</b> for me in Germany.
-				{age} years. CS at
-				<Link href="https://uni-augsburg.de/">University of Augsburg</Link>. I do photo, video,
-				music and speak <Link href="https://github.com/osumatrix">computer</Link>
-				fluently.
+				It is <b>{time}</b> for me in {PUBLIC_LOCATION}.
+				{age} {PUBLIC_AGE_SUFFIX}
+				<br />
+				{PUBLIC_BIO}
 			</p>
 			<ul>
-				<Social faIcon={faEnvelope} link="mailto:mail@osumatrix.me" />
-				<Social faIcon={faKey} link="https://github.com/oSumAtrIX.gpg" />
-				<Social faIcon={faDiscord} link="https://discord.com/users/7373y631117598811" />
-				<Social faIcon={faGithub} link="https://github.com/oSumAtrIX" />
-				<Social faIcon={faTelegramPlane} link="https://t.me/oSumAtrIX" />
-				<Social faIcon={faReddit} link="https://reddit.com/u/oSumAtrIX" />
-				<Social
-					faIcon={faYoutube}
-					link="https://www.youtube.com/channel/UCk9pnU2BGmIafksQPvTJfuA"
-				/>
-				<Social faIcon={faTwitter} link="https://twitter.com/oSumAtrIX" />
-				<Social faIcon={faGamepad} link="https://osu.ppy.sh/u/oSumAtrIX" />
-				<Social faIcon={faChessKnight} link="https://lichess.org/@/oSumAtrIX" />
+				<SocialLinks />
 			</ul>
 		</div>
 	</div>

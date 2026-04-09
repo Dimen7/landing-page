@@ -3,6 +3,18 @@
 	import '../styles/global.scss';
 	import '../styles/fonts.scss';
 	import { burst, scale } from '../store/cursor';
+	import {
+		PUBLIC_NAME,
+		PUBLIC_DESCRIPTION,
+		PUBLIC_THEME_COLOR,
+		PUBLIC_IMAGE,
+		PUBLIC_COLOR_WHITE,
+		PUBLIC_COLOR_GRAY,
+		PUBLIC_COLOR_HIGHLIGHT,
+		PUBLIC_COLOR_BG,
+		PUBLIC_CURSOR_NOISE_URL,
+		PUBLIC_CURSOR_DIVISOR
+	} from '$env/static/public';
 
 	let burstInterval: ReturnType<typeof setInterval>;
 	let randomInterval: ReturnType<typeof setInterval>;
@@ -80,13 +92,29 @@
 <svelte:head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="og:title" content="oSumAtrIX" />
-	<meta content="/osumatrix.webp" property="og:image" />
-	<meta property="og:description" content="My personal website" />
-	<meta name="twitter:image" itemprop="image" content="/osumatrix.webp" />
+	<meta name="og:title" content={PUBLIC_NAME} />
+	<meta content={PUBLIC_IMAGE} property="og:image" />
+	<meta property="og:description" content={PUBLIC_DESCRIPTION} />
+	<meta name="twitter:image" itemprop="image" content={PUBLIC_IMAGE} />
 	<meta name="twitter:card" content="summary" />
-	<meta name="theme-color" content="#000" />
-	<title>oSumAtrIX</title>
+	<meta name="theme-color" content={PUBLIC_THEME_COLOR} />
+	<title>{PUBLIC_NAME}</title>
+
+	<style>
+		:root {
+			--white: {PUBLIC_COLOR_WHITE};
+			--gray: {PUBLIC_COLOR_GRAY};
+			--highlight: {PUBLIC_COLOR_HIGHLIGHT};
+			--bg-color: {PUBLIC_COLOR_BG};
+		}
+	</style>
+
+	<script>
+		window.CURSOR_CONFIG = {
+			noiseUrl: "{PUBLIC_CURSOR_NOISE_URL}",
+			divisor: 1 / {PUBLIC_CURSOR_DIVISOR || 5}
+		};
+	</script>
 </svelte:head>
 
 <svelte:window
