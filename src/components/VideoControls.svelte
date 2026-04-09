@@ -7,6 +7,8 @@
 		faVolumeLow,
 		faVolumeXmark
 	} from '@fortawesome/free-solid-svg-icons';
+	import { faYoutube } from '@fortawesome/free-brands-svg-icons';
+	import { PUBLIC_BG_VIDEO_ID } from '$env/static/public';
 	import { videoPlaying, videoVolume } from '../store/bgvideo';
 
 	$: volumeIcon =
@@ -21,6 +23,17 @@
 	<input type="range" min="0" max="100" step="1" bind:value={$videoVolume} />
 
 	<Fa icon={volumeIcon} />
+
+	<a
+		href="https://www.youtube.com/watch?v={PUBLIC_BG_VIDEO_ID}"
+		target="_blank"
+		rel="noopener noreferrer"
+		draggable="false"
+		on:dragstart|preventDefault
+		id="yt-link"
+	>
+		<Fa icon={faYoutube} />
+	</a>
 </div>
 
 <style lang="scss">
@@ -83,6 +96,18 @@
 				background: var(--white);
 				border: none;
 				cursor: none;
+			}
+		}
+
+		#yt-link {
+			font-size: 1.1rem;
+			color: var(--white);
+			opacity: 0.5;
+			transition: opacity 0.2s;
+
+			&:hover {
+				opacity: 1;
+				color: #ff0000;
 			}
 		}
 	}
