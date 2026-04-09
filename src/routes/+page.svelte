@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { scale } from '../store/cursor';
 	import SocialLinks from '../components/SocialLinks.svelte';
+	import BgVideo from '../components/BgVideo.svelte';
 	import defaultProfileImageUrl from '$lib/assets/avatar.svg';
 	import {
 		PUBLIC_NAME,
@@ -59,6 +60,8 @@
 </script>
 
 <svelte:window on:mousemove={onMouseMove} />
+
+<BgVideo />
 
 <main class:hovered bind:this={mainEl}>
 	<!-- svelte-ignore a11y_mouse_events_have_key_events -->
