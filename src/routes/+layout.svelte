@@ -20,7 +20,7 @@
 	<meta name="twitter:image" itemprop="image" content={profileImageUrl} />
 	<meta name="twitter:card" content="summary" />
 	<meta name="theme-color" content={env.PUBLIC_THEME_COLOR} />
-	<title>{env.PUBLIC_NAME}</title>
+	<title>{env.PUBLIC_NAME || 'Loading...'}</title>
 	<link rel="icon" href={faviconUrl} />
 
 	<style>

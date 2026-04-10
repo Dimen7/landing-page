@@ -36,7 +36,7 @@ This project is a fork of the original [osumatrix.me](https://github.com/oSumAtr
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Dimen7/landing-page.git
    cd landing-page
    ```
 
@@ -71,10 +71,10 @@ The project uses a multi-stage Docker build and the SvelteKit Node adapter.
 2. Access the application:
    The site is served at http://localhost:3000.
 
-3. Rebuilding after configuration changes:
-   Since SvelteKit inlines static environment variables (PUBLIC_*) during the build, you must rebuild the image after changing these values in your .env file:
+3. Updating the configuration:
+   Since this project uses dynamic environment variables, you **do not** need to rebuild the Docker image when changing values in your `.env` file. Simply restart the container to apply the changes:
    ```bash
-   docker compose up -d --build
+   docker compose up -d
    ```
 
 ---

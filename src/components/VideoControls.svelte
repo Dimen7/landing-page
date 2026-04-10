@@ -13,16 +13,22 @@
 
 	$: volumeIcon =
 		$videoVolume === 0 ? faVolumeXmark : $videoVolume < 50 ? faVolumeLow : faVolumeHigh;
+
+	let innerWidth: number;
 </script>
+
+<svelte:window bind:innerWidth />
 
 <div id="video-controls">
 	<button on:click={() => videoPlaying.update((p) => !p)}>
 		<Fa icon={$videoPlaying ? faPause : faPlay} />
 	</button>
 
-	<input type="range" min="0" max="100" step="1" bind:value={$videoVolume} />
+	{#if innerWidth >= 1024}
+		<input type="range" min="0" max="100" step="1" bind:value={$videoVolume} />
 
-	<Fa icon={volumeIcon} />
+		<Fa icon={volumeIcon} />
+	{/if}
 
 	<a
 		href="https://www.youtube.com/watch?v={env.PUBLIC_BG_VIDEO_ID}"
