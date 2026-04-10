@@ -101,7 +101,7 @@
 {/if}
 
 {#if $videoPlaying}
-	<footer transition:fly={{ y: 80, duration: 700, opacity: 0 }}>
+	<footer transition:fly={{ y: 80, duration: 700, opacity: 0, delay: 50 }}>
 		<span id="footer-name">{PUBLIC_NAME}</span>
 		<span id="footer-time">
 			{time} &middot; {PUBLIC_LOCATION}
