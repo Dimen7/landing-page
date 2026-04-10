@@ -2,9 +2,9 @@
 	import { onMount } from 'svelte';
 	import { initVoid, jumpScareUrl, voidAudioUrl } from '$lib/void';
 	import defaultProfileImageUrl from '$lib/assets/avatar.svg';
-	import { PUBLIC_NAME, PUBLIC_IMAGE, PUBLIC_THEME_COLOR } from '$env/static/public';
+	import { env } from '$env/dynamic/public';
 
-	const profileImageUrl = PUBLIC_IMAGE || defaultProfileImageUrl;
+	const profileImageUrl = env.PUBLIC_IMAGE || defaultProfileImageUrl;
 
 	onMount(() => {
 		const script = document.createElement('script');
@@ -15,14 +15,14 @@
 </script>
 
 <svelte:head>
-	<title>Void - {PUBLIC_NAME}</title>
-	<meta property="og:title" content="Void - {PUBLIC_NAME}" />
+	<title>Void - {env.PUBLIC_NAME}</title>
+	<meta property="og:title" content="Void - {env.PUBLIC_NAME}" />
 	<meta content={profileImageUrl} property="og:image" />
 	<meta
 		property="og:description"
 		content="Do not trust what you are being told. Do not follow what you are being told. Do not enter the page at all, if you fear the void. The void is infinite and damage is permanently irreversible. Caution is advised."
 	/>
-	<meta name="theme-color" content={PUBLIC_THEME_COLOR} />
+	<meta name="theme-color" content={env.PUBLIC_THEME_COLOR} />
 </svelte:head>
 
 <div class="void-wrapper">

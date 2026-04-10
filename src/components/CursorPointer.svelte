@@ -3,7 +3,7 @@
 	import { burst, scale } from '../store/cursor';
 	import { initCursorTrail } from '$lib/cursor/cursor_trail';
 	import clickSoundUrl from '$lib/assets/click.mp3';
-	import { PUBLIC_CURSOR_NOISE_URL, PUBLIC_CURSOR_DIVISOR } from '$env/static/public';
+	import { env } from '$env/dynamic/public';
 
 	let burstInterval: ReturnType<typeof setInterval>;
 	let randomInterval: ReturnType<typeof setInterval>;
@@ -30,8 +30,8 @@
 
 		// Initialize cursor trail (three.js bundled via npm)
 		initCursorTrail({
-			noiseUrl: PUBLIC_CURSOR_NOISE_URL,
-			divisor: Number(PUBLIC_CURSOR_DIVISOR) || 0.2
+			noiseUrl: env.PUBLIC_CURSOR_NOISE_URL,
+			divisor: Number(env.PUBLIC_CURSOR_DIVISOR) || 0.2
 		});
 
 		// Load click sound

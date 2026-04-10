@@ -7,8 +7,13 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-# Copy all files (including .env if present)
+# Copy all files
 COPY . .
+
+# Use .env.example as a fallback for build time if .env is missing.
+# This prevents build errors with $env/static/public, while actual values
+# are provided at runtime via env_file in docker-compose.
+RUN if [ ! -f .env ]; then cp .env.example .env; fi
 
 # Build the SvelteKit app
 RUN npm run build

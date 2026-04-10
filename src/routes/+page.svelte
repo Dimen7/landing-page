@@ -7,22 +7,13 @@
 	import VideoControls from '../components/VideoControls.svelte';
 	import { videoPlaying } from '../store/bgvideo';
 	import defaultProfileImageUrl from '$lib/assets/avatar.svg';
-	import {
-		PUBLIC_NAME,
-		PUBLIC_LOCALE,
-		PUBLIC_TIMEZONE,
-		PUBLIC_LOCATION,
-		PUBLIC_BIRTHDAY,
-		PUBLIC_AGE_SUFFIX,
-		PUBLIC_BIO,
-		PUBLIC_IMAGE
-	} from '$env/static/public';
+	import { env } from '$env/dynamic/public';
 
-	const profileImageUrl = PUBLIC_IMAGE || defaultProfileImageUrl;
+	const profileImageUrl = env.PUBLIC_IMAGE || defaultProfileImageUrl;
 
 	const formatTime = () =>
-		new Date().toLocaleTimeString(PUBLIC_LOCALE, {
-			timeZone: PUBLIC_TIMEZONE,
+		new Date().toLocaleTimeString(env.PUBLIC_LOCALE, {
+			timeZone: env.PUBLIC_TIMEZONE,
 			hour: '2-digit',
 			minute: '2-digit',
 			second: '2-digit'
@@ -37,7 +28,7 @@
 		return () => clearInterval(interval);
 	});
 
-	let birthdayDate = new Date(PUBLIC_BIRTHDAY);
+	let birthdayDate = new Date(env.PUBLIC_BIRTHDAY);
 	let age = Math.floor((Date.now() - birthdayDate.getTime()) / 3.15576e10);
 
 	let hovered = false;
@@ -73,19 +64,19 @@
 			bind:this={imgEl}
 			draggable="false"
 			src={profileImageUrl}
-			alt={PUBLIC_NAME}
+			alt={env.PUBLIC_NAME}
 			on:mouseenter|passive={() => !hovered && scale.set(1.2)}
 			on:mouseleave|passive={() => !hovered && scale.set(0)}
 		/>
 	</div>
 	<div id="rotating-card" class:hidden={$videoPlaying}>
 		<div id="card">
-			<h1>{PUBLIC_NAME}</h1>
+			<h1>{env.PUBLIC_NAME}</h1>
 			<p>
-				It is <b>{time}</b> for me in {PUBLIC_LOCATION}.
-				{age} {PUBLIC_AGE_SUFFIX}
+				It is <b>{time}</b> for me in {env.PUBLIC_LOCATION}.
+				{age} {env.PUBLIC_AGE_SUFFIX}
 				<br />
-				{PUBLIC_BIO}
+				{env.PUBLIC_BIO}
 			</p>
 			<ul>
 				<SocialLinks />
@@ -102,11 +93,11 @@
 
 {#if $videoPlaying}
 	<footer transition:fly={{ y: 80, duration: 700, opacity: 0, delay: 50 }}>
-		<span id="footer-name">{PUBLIC_NAME}</span>
+		<span id="footer-name">{env.PUBLIC_NAME}</span>
 		<span id="footer-time">
-			{time} &middot; {PUBLIC_LOCATION}
+			{time} &middot; {env.PUBLIC_LOCATION}
 		</span>
-		<span id="footer-bio">{age} {PUBLIC_AGE_SUFFIX} &middot; {PUBLIC_BIO}</span>
+		<span id="footer-bio">{age} {env.PUBLIC_AGE_SUFFIX} &middot; {env.PUBLIC_BIO}</span>
 		<ul>
 			<SocialLinks />
 		</ul>
