@@ -22,11 +22,15 @@ export function initCursorTrail(config: CursorConfig) {
 	const new_mouse = { x: 0, y: 0 };
 
 	// Register immediately so mouse position is tracked before texture loads
-	document.addEventListener('pointermove', (e) => {
-		const ratio = window.innerHeight / window.innerWidth;
-		new_mouse.x = (e.pageX - window.innerWidth / 2) / window.innerWidth / ratio;
-		new_mouse.y = ((e.pageY - window.innerHeight / 2) / window.innerHeight) * -1;
-	});
+	document.addEventListener(
+		'pointermove',
+		(e) => {
+			const ratio = window.innerHeight / window.innerWidth;
+			new_mouse.x = (e.pageX - window.innerWidth / 2) / window.innerWidth / ratio;
+			new_mouse.y = ((e.pageY - window.innerHeight / 2) / window.innerHeight) * -1;
+		},
+		{ passive: true }
+	);
 
 	const loader = new THREE.TextureLoader();
 	loader.setCrossOrigin('anonymous');
@@ -64,8 +68,8 @@ export function initCursorTrail(config: CursorConfig) {
 		document.body.prepend(renderer.domElement);
 
 		onWindowResize();
-		window.addEventListener('resize', onWindowResize, false);
-		window.addEventListener('orientationchange', onWindowResize, false);
+		window.addEventListener('resize', onWindowResize, { passive: true });
+		window.addEventListener('orientationchange', onWindowResize, { passive: true });
 
 		animate();
 	});

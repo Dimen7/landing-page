@@ -62,7 +62,7 @@
 	}
 </script>
 
-<svelte:window on:mousemove={onMouseMove} />
+<svelte:window on:mousemove|passive={onMouseMove} />
 
 <BgVideo />
 
@@ -74,8 +74,8 @@
 			draggable="false"
 			src={profileImageUrl}
 			alt={PUBLIC_NAME}
-			on:mouseenter={() => !hovered && scale.set(1.2)}
-			on:mouseleave={() => !hovered && scale.set(0)}
+			on:mouseenter|passive={() => !hovered && scale.set(1.2)}
+			on:mouseleave|passive={() => !hovered && scale.set(0)}
 		/>
 	</div>
 	<div id="rotating-card" class:hidden={$videoPlaying}>

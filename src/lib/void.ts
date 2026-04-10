@@ -81,19 +81,27 @@ export function initVoid() {
 
 		audio.play();
 
-		document.onmouseleave = () => {
-			video.hidden = false;
-			if (text) text.hidden = true;
-			video.play();
-			audio.pause();
-		};
+		document.addEventListener(
+			'mouseleave',
+			() => {
+				video.hidden = false;
+				if (text) text.hidden = true;
+				video.play();
+				audio.pause();
+			},
+			{ passive: true }
+		);
 
-		document.onmouseenter = () => {
-			video.hidden = true;
-			if (text) text.hidden = false;
-			video.load();
-			audio.play();
-		};
+		document.addEventListener(
+			'mouseenter',
+			() => {
+				video.hidden = true;
+				if (text) text.hidden = false;
+				video.load();
+				audio.play();
+			},
+			{ passive: true }
+		);
 
 		typeItInstance.go();
 	};

@@ -64,11 +64,11 @@
 
 <svelte:window
 	on:contextmenu={(e) => e.preventDefault()}
-	on:mousemove={(e) => {
+	on:mousemove|passive={(e) => {
 		mouseX = e.clientX;
 		mouseY = e.clientY;
 	}}
-	on:mousedown={() => {
+	on:mousedown|passive={() => {
 		playClickSound();
 
 		if ($burst < 1) burst.increment();

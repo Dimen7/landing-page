@@ -7,7 +7,10 @@
 	let iframeEl: HTMLIFrameElement;
 
 	function postCmd(func: string, args: unknown[] = []) {
-		iframeEl?.contentWindow?.postMessage(JSON.stringify({ event: 'command', func, args }), '*');
+		iframeEl?.contentWindow?.postMessage(
+			JSON.stringify({ event: 'command', func, args }),
+			'https://www.youtube-nocookie.com'
+		);
 	}
 
 	$: if ($videoActive) postCmd($videoPlaying ? 'playVideo' : 'pauseVideo');
@@ -31,12 +34,12 @@
 
 	onMount(() => {
 		if (!PUBLIC_BG_VIDEO_ID) return;
-		window.addEventListener('click', onWindowClick);
+		window.addEventListener('click', onWindowClick, { passive: true });
 		return () => window.removeEventListener('click', onWindowClick);
 	});
 </script>
 
-<svelte:window on:wheel={onScroll} />
+<svelte:window on:wheel|passive={onScroll} />
 
 {#if PUBLIC_BG_VIDEO_ID && $videoActive}
 	<div id="bg-video" in:fade={{ duration: 2000 }} style="--video-blur: {Number(PUBLIC_BG_VIDEO_BLUR) || 8}px">
@@ -46,7 +49,7 @@
 			allow="autoplay; encrypted-media"
 			frameborder="0"
 			title="Background video"
-		/>
+		></iframe>
 	</div>
 {/if}
 

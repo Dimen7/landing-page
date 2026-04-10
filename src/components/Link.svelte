@@ -7,8 +7,8 @@
 
 <!-- svelte-ignore a11y_mouse_events_have_key_events -->
 <a
-	on:mouseenter={() => scale.set(-0.6)}
-	on:mouseleave={() => scale.set(0)}
+	on:mouseenter|passive={() => scale.set(-0.6)}
+	on:mouseleave|passive={() => scale.set(0)}
 	on:dragstart|preventDefault
 	draggable="false"
 	{href}
