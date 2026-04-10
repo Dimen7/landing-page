@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://one.dmn7.dev/rocket/web/dmn7.space/landing-v2/compare/v0.1.0...v0.2.0) (2026-04-10)
+
+
+### Features
+
+* add background YouTube video with blur, fade-in on first click, scroll to adjust volume ([a9094ea](https://one.dmn7.dev/rocket/web/dmn7.space/landing-v2/commit/a9094ea6106949433aba4fcbfdc4989b05383a0b))
+* add vertical glass video controls bar with play/pause, volume slider and scroll sync ([874403e](https://one.dmn7.dev/rocket/web/dmn7.space/landing-v2/commit/874403e43e42e8a1f58e3feeb050bcd14de2c756))
+* add YouTube link icon to video controls ([3296fc8](https://one.dmn7.dev/rocket/web/dmn7.space/landing-v2/commit/3296fc8c4fef9d266184fa713741043be58bad0b))
+* CD spin animation, no tilt in corner, glass footer while video plays ([9bb51c9](https://one.dmn7.dev/rocket/web/dmn7.space/landing-v2/commit/9bb51c9e75c5534897827dac9bd05fb65233124e))
+* dockerize project, rename to landing-page and update documentation ([e0cea16](https://one.dmn7.dev/rocket/web/dmn7.space/landing-v2/commit/e0cea160e2705dd688f7407f670ce4886a6996ea))
+* make video blur and initial volume configurable via env vars ([5d011d4](https://one.dmn7.dev/rocket/web/dmn7.space/landing-v2/commit/5d011d4b38e214b3b818af12baaf403f14354450))
+* toggle video pause on click, show only profile image in corner when video plays ([077b621](https://one.dmn7.dev/rocket/web/dmn7.space/landing-v2/commit/077b621191542c98deef92acdef31d721a10c947))
+
+
+### Bug Fixes
+
+* hide overflow on body to prevent scrollbar when logo is translated off-screen ([428e471](https://one.dmn7.dev/rocket/web/dmn7.space/landing-v2/commit/428e471068845162d39d31f0f62741fc2da410b3))
+* **mobile:** stabilize logo and footer animations ([ac58e97](https://one.dmn7.dev/rocket/web/dmn7.space/landing-v2/commit/ac58e97898d54188e17a7baf140c44817072cc6a))
+* move profile image to top-right corner during video playback ([acbcd40](https://one.dmn7.dev/rocket/web/dmn7.space/landing-v2/commit/acbcd40dcafe85e034719faad5de88001a567a89))
+
 ## [0.1.0](https://one.dmn7.dev/rocket/web/dmn7.space/landing-v2/compare/v0.0.2...v0.1.0) (2026-04-09)
 
 

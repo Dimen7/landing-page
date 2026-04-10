@@ -1,0 +1,9 @@
+services:
+  app:
+    build: .
+    container_name: landing-page
+    restart: always
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
