@@ -11,7 +11,7 @@ All notable changes to this project will be documented in this file. See [standa
 * add vertical glass video controls bar with play/pause, volume slider and scroll sync ([874403e](https://one.dmn7.dev/rocket/web/dmn7.space/landing-v2/commit/874403e43e42e8a1f58e3feeb050bcd14de2c756))
 * add YouTube link icon to video controls ([3296fc8](https://one.dmn7.dev/rocket/web/dmn7.space/landing-v2/commit/3296fc8c4fef9d266184fa713741043be58bad0b))
 * CD spin animation, no tilt in corner, glass footer while video plays ([9bb51c9](https://one.dmn7.dev/rocket/web/dmn7.space/landing-v2/commit/9bb51c9e75c5534897827dac9bd05fb65233124e))
-* dockerize project, rename to landing-page and update documentation ([e0cea16](https://one.dmn7.dev/rocket/web/dmn7.space/landing-v2/commit/e0cea160e2705dd688f7407f670ce4886a6996ea))
+* dockerize project, rename to landing-page and update documentation ([f71b539](https://one.dmn7.dev/rocket/web/dmn7.space/landing-v2/commit/f71b539724487ac2e11aebc18be7151919b4ee93))
 * make video blur and initial volume configurable via env vars ([5d011d4](https://one.dmn7.dev/rocket/web/dmn7.space/landing-v2/commit/5d011d4b38e214b3b818af12baaf403f14354450))
 * toggle video pause on click, show only profile image in corner when video plays ([077b621](https://one.dmn7.dev/rocket/web/dmn7.space/landing-v2/commit/077b621191542c98deef92acdef31d721a10c947))
 
