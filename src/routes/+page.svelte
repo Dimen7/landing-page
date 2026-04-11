@@ -12,8 +12,8 @@
 	const profileImageUrl = env.PUBLIC_IMAGE || defaultProfileImageUrl;
 
 	const formatTime = () =>
-		new Date().toLocaleTimeString(env.PUBLIC_LOCALE, {
-			timeZone: env.PUBLIC_TIMEZONE,
+		new Date().toLocaleTimeString(env.PUBLIC_LOCALE || 'en-US', {
+			timeZone: env.PUBLIC_TIMEZONE || 'UTC',
 			hour: '2-digit',
 			minute: '2-digit',
 			second: '2-digit'
@@ -28,8 +28,15 @@
 		return () => clearInterval(interval);
 	});
 
-	let birthdayDate = new Date(env.PUBLIC_BIRTHDAY);
-	let age = Math.floor((Date.now() - birthdayDate.getTime()) / 3.15576e10);
+	let age = 0;
+	try {
+		const birthdayDate = new Date(env.PUBLIC_BIRTHDAY);
+		if (!isNaN(birthdayDate.getTime())) {
+			age = Math.floor((Date.now() - birthdayDate.getTime()) / 3.15576e10);
+		}
+	} catch (e) {
+		// Fallback for invalid/empty date
+	}
 
 	let hovered = false;
 	let mainEl: HTMLElement;
@@ -64,19 +71,27 @@
 			bind:this={imgEl}
 			draggable="false"
 			src={profileImageUrl}
-			alt={env.PUBLIC_NAME}
+			alt={env.PUBLIC_NAME || 'Profile Image'}
 			on:mouseenter|passive={() => !hovered && scale.set(1.2)}
 			on:mouseleave|passive={() => !hovered && scale.set(0)}
 		/>
 	</div>
 	<div id="rotating-card" class:hidden={$videoPlaying}>
 		<div id="card">
-			<h1>{env.PUBLIC_NAME}</h1>
+			<h1>{env.PUBLIC_NAME || 'Loading...'}</h1>
 			<p>
-				It is <b>{time}</b> for me in {env.PUBLIC_LOCATION}.
-				{age} {env.PUBLIC_AGE_SUFFIX}
-				<br />
-				{env.PUBLIC_BIO}
+				{#if env.PUBLIC_LOCATION}
+					It is <b>{time}</b> for me in {env.PUBLIC_LOCATION}.
+				{/if}
+				{#if age > 0}
+					{age} {env.PUBLIC_AGE_SUFFIX || 'years old'}
+				{/if}
+				{#if env.PUBLIC_BIO}
+					<br />
+					{env.PUBLIC_BIO}
+				{:else if !env.PUBLIC_LOCATION && age === 0}
+					Loading bio...
+				{/if}
 			</p>
 			<ul>
 				<SocialLinks />
@@ -93,11 +108,17 @@
 
 {#if $videoPlaying}
 	<footer transition:fly={{ y: 80, duration: 700, opacity: 0, delay: 50 }}>
-		<span id="footer-name">{env.PUBLIC_NAME}</span>
-		<span id="footer-time">
-			{time} &middot; {env.PUBLIC_LOCATION}
+		<span id="footer-name">{env.PUBLIC_NAME || 'Loading...'}</span>
+		{#if env.PUBLIC_LOCATION}
+			<span id="footer-time">
+				{time} &middot; {env.PUBLIC_LOCATION}
+			</span>
+		{/if}
+		<span id="footer-bio">
+			{#if age > 0}{age} {env.PUBLIC_AGE_SUFFIX || 'years old'}{/if}
+			{#if age > 0 && env.PUBLIC_BIO} &middot; {/if}
+			{env.PUBLIC_BIO || 'Loading bio...'}
 		</span>
-		<span id="footer-bio">{age} {env.PUBLIC_AGE_SUFFIX} &middot; {env.PUBLIC_BIO}</span>
 		<ul>
 			<SocialLinks />
 		</ul>

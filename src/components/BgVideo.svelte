@@ -42,6 +42,9 @@
 				rel: 0,
 				iv_load_policy: 3,
 				playsinline: 1,
+				mute: 1,
+				enablejsapi: 1,
+				origin: window.location.origin,
 				loop: getAllVideoIds().length === 1 ? 1 : 0
 			},
 			events: {
@@ -54,8 +57,13 @@
 
 	function onPlayerReady(event: any) {
 		playerReady = true;
-		// Pause immediately to prevent auto-sound on load
-		event.target.pauseVideo();
+		// If we are already active/playing, start video and unmute
+		if ($videoActive && $videoPlaying) {
+			event.target.playVideo();
+			event.target.unMute();
+		} else {
+			event.target.pauseVideo();
+		}
 	}
 
 	function onPlayerStateChange(event: any) {
@@ -101,8 +109,24 @@
 		if (!$videoActive) {
 			videoActive.set(true);
 			videoPlaying.set(true);
+			
+			// IMMEDIATE UNMUTE for iOS gesture unlock
+			if (player && playerReady) {
+				player.unMute();
+				player.playVideo();
+			}
 		} else {
-			videoPlaying.update((p) => !p);
+			const next = !$videoPlaying;
+			videoPlaying.set(next);
+			
+			if (player && playerReady) {
+				if (next) {
+					player.playVideo();
+					player.unMute();
+				} else {
+					player.pauseVideo();
+				}
+			}
 		}
 	}
 
@@ -119,7 +143,7 @@
 
 		window.addEventListener('click', onWindowClick, { passive: false });
 
-		// Fallback: Wait for YouTube API to load (timeout after 5 seconds)
+		// Fallback: Wait for YouTube API to load
 		let retries = 0;
 		const waitForAPI = setInterval(() => {
 			if (window.YT && $currentVideoId) {
@@ -193,16 +217,15 @@
 		loadingVideo = true;
 		lastLoadedVideoId = $currentVideoId;
 
-		player.cueVideoById($currentVideoId);
+		player.loadVideoById($currentVideoId);
 
-		// Resume playback after video loads
-		const resumeDelay = hasMultipleVideos ? 1000 : 0;
 		setTimeout(() => {
 			loadingVideo = false;
 			if ($videoActive && $videoPlaying) {
 				player.playVideo();
+				player.unMute();
 			}
-		}, resumeDelay);
+		}, 500);
 	}
 </script>
 
@@ -247,6 +270,8 @@
 
 			:global(iframe) {
 				border: none;
+				width: 100%;
+				height: 100%;
 			}
 		}
 	}

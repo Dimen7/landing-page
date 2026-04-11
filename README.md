@@ -57,6 +57,32 @@ This project is a fork of the original [osumatrix.me](https://github.com/oSumAtr
    ```
    Access the site at http://localhost:5173.
 
+### iOS & Mobile Development
+
+For local development on iOS (Safari), YouTube background videos are often blocked when using a local IP address (e.g., `http://192.168.x.x`). To test full functionality including auto-play and audio on mobile, it is recommended to use **ngrok** to provide a secure HTTPS tunnel and a valid domain.
+
+1. Install [ngrok](https://ngrok.com/) and authenticate.
+2. Start a tunnel to your local dev server:
+   ```bash
+   ngrok http 5173
+   ```
+3. Copy the `https://...` URL provided by ngrok and open it on your mobile device.
+
+**Note:** The `vite.config.ts` is pre-configured to allow `.ngrok-free.dev` hosts.
+
+### Deployment Troubleshooting (Cloudflare)
+
+If your YouTube background video shows "Video not available" after deploying with Cloudflare, you likely need to adjust your **Referrer Policy**. YouTube requires a valid referrer to verify the origin of the API request.
+
+1. Go to your Cloudflare Dashboard.
+2. Navigate to **Rules** -> **Transform Rules** -> **Modify Response Header**.
+   - [Direct Link](https://dash.cloudflare.com/redirect?zone=rules/transform-rules/modify-response-header)
+3. Create a new rule:
+   - **Name:** `YouTube Referrer Fix`
+   - **Match:** All incoming requests
+   - **Header:** Set static `Referrer-Policy` to `no-referrer-when-downgrade`
+4. Deploy the rule.
+
 ---
 
 ## Docker Deployment
