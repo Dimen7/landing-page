@@ -77,6 +77,17 @@ The project uses a multi-stage Docker build and the SvelteKit Node adapter.
    docker compose up -d
    ```
 
+### Using Pre-built Docker Image
+
+Instead of building locally, you can pull the pre-built image from GitHub Container Registry:
+
+```bash
+docker pull ghcr.io/dimen7/landing-page:latest
+docker run -d -p 3000:3000 --env-file .env ghcr.io/dimen7/landing-page:latest
+```
+
+The image is automatically built and pushed on every push to the `main` branch.
+
 ---
 
 ## Configuration
