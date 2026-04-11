@@ -1,28 +1,92 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { fade } from 'svelte/transition';
 	import { env } from '$env/dynamic/public';
-	import { videoActive, videoPlaying, videoVolume } from '../store/bgvideo';
+	import { videoActive, videoPlaying, videoVolume, currentVideoId, getRandomVideoId, getAllVideoIds } from '../store/bgvideo';
 
-	let iframeEl: HTMLIFrameElement;
+	let player: YT.Player | null = null;
+	let playerReady = false;
 
-	function postCmd(func: string, args: unknown[] = []) {
-		if (!iframeEl?.contentWindow) return;
-		iframeEl.contentWindow.postMessage(
-			JSON.stringify({ event: 'command', func, args }),
-			'https://www.youtube.com'
-		);
+	// YouTube IFrame API types
+	declare global {
+		interface Window {
+			YT: any;
+			onYouTubeIframeAPIReady: () => void;
+		}
 	}
 
-	// Sync play/pause state
-	$: if ($videoActive) {
-		postCmd($videoPlaying ? 'playVideo' : 'pauseVideo');
+	function initYouTubeAPI() {
+		if (typeof window === 'undefined' || window.YT) return;
+
+		const tag = document.createElement('script');
+		tag.src = 'https://www.youtube.com/iframe_api';
+		const firstScriptTag = document.getElementsByTagName('script')[0];
+		firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
 	}
 
-	// Sync volume and mute state
-	$: if ($videoActive) {
-		postCmd('unMute');
-		postCmd('setVolume', [$videoVolume]);
+	function createPlayer(videoId: string) {
+		if (!window.YT || !videoId) return;
+
+		if (player) {
+			player.cueVideoById(videoId);
+			return;
+		}
+
+		player = new window.YT.Player('bg-video-player', {
+			height: '100%',
+			width: '100%',
+			videoId: videoId,
+			playerVars: {
+				autoplay: 1,
+				controls: 0,
+				modestbranding: 1,
+				rel: 0,
+				iv_load_policy: 3,
+				playsinline: 1,
+				loop: getAllVideoIds().length === 1 ? 1 : 0
+			},
+			events: {
+				onReady: onPlayerReady,
+				onStateChange: onPlayerStateChange,
+				onError: onPlayerError
+			}
+		});
+	}
+
+	function onPlayerReady(event: any) {
+		playerReady = true;
+		// Pause immediately to prevent auto-sound on load
+		event.target.pauseVideo();
+	}
+
+	function onPlayerStateChange(event: any) {
+		const state = event.data;
+		const videoIds = getAllVideoIds();
+
+		// 0 = ENDED, 1 = PLAYING, 2 = PAUSED, 3 = BUFFERING, 5 = CUED
+		if (state === 0) {
+			// Video ended
+			clearVideoTimer();
+
+			if (videoIds.length > 1) {
+				// Multiple videos - load next random video
+				setTimeout(() => {
+					currentVideoId.set(getRandomVideoId());
+				}, 500);
+			} else if (videoIds.length === 1 && player) {
+				// Single video - replay from start
+				player.seekTo(0);
+				if ($videoActive && $videoPlaying) {
+					player.playVideo();
+				}
+			}
+		} else if (state === 2) {
+			// Video paused - stop timer
+			clearVideoTimer();
+		}
+	}
+
+	function onPlayerError(event: any) {
+		console.error('YouTube player error:', event.data);
 	}
 
 	function onScroll(e: WheelEvent) {
@@ -33,7 +97,7 @@
 	function onWindowClick(e: MouseEvent) {
 		if (!env.PUBLIC_BG_VIDEO_ID) return;
 		if ((e.target as Element).closest('a, button, input')) return;
-		
+
 		if (!$videoActive) {
 			videoActive.set(true);
 			videoPlaying.set(true);
@@ -44,29 +108,113 @@
 
 	onMount(() => {
 		if (!env.PUBLIC_BG_VIDEO_ID) return;
+
+		// Load YouTube IFrame API
+		initYouTubeAPI();
+		window.onYouTubeIframeAPIReady = () => {
+			if ($currentVideoId) {
+				createPlayer($currentVideoId);
+			}
+		};
+
 		window.addEventListener('click', onWindowClick, { passive: false });
-		return () => window.removeEventListener('click', onWindowClick);
+
+		// Fallback: Wait for YouTube API to load (timeout after 5 seconds)
+		let retries = 0;
+		const waitForAPI = setInterval(() => {
+			if (window.YT && $currentVideoId) {
+				clearInterval(waitForAPI);
+				if (!player) {
+					createPlayer($currentVideoId);
+				}
+			}
+			retries++;
+			if (retries > 50) clearInterval(waitForAPI);
+		}, 100);
+
+		return () => {
+			window.removeEventListener('click', onWindowClick);
+			clearVideoTimer();
+		};
 	});
 
-	const origin = typeof window !== 'undefined' ? window.location.origin : '';
+	const videoIds = getAllVideoIds();
+	const hasMultipleVideos = videoIds.length > 1;
+	let videoTimer: number | null = null;
+	let lastLoadedVideoId = '';
+	let loadingVideo = false;
+
+	function startVideoTimer(duration: number) {
+		clearVideoTimer();
+		if (!hasMultipleVideos || duration <= 0) return;
+
+		// Add 1 second buffer for safety
+		const timeoutMs = (duration + 1) * 1000;
+
+		videoTimer = window.setTimeout(() => {
+			if ($videoActive && $videoPlaying && hasMultipleVideos) {
+				currentVideoId.set(getRandomVideoId());
+			}
+		}, timeoutMs);
+	}
+
+	function clearVideoTimer() {
+		if (videoTimer) {
+			clearTimeout(videoTimer);
+			videoTimer = null;
+		}
+	}
+
+	// Sync play/pause with store
+	$: if (player && playerReady && $videoActive) {
+		if ($videoPlaying) {
+			player.playVideo();
+		} else {
+			player.pauseVideo();
+			clearVideoTimer();
+		}
+	}
+
+	// Start auto-next timer when user plays video (only for multiple videos)
+	$: if (player && playerReady && $videoActive && $videoPlaying && hasMultipleVideos) {
+		const duration = player.getDuration();
+		if (duration > 0) {
+			startVideoTimer(duration);
+		}
+	}
+
+	// Sync volume with store
+	$: if (player && playerReady && $videoActive && $videoPlaying) {
+		player.setVolume($videoVolume);
+	}
+
+	// Load new video when currentVideoId changes
+	$: if (player && playerReady && $currentVideoId && $currentVideoId !== lastLoadedVideoId && !loadingVideo) {
+		loadingVideo = true;
+		lastLoadedVideoId = $currentVideoId;
+
+		player.cueVideoById($currentVideoId);
+
+		// Resume playback after video loads
+		const resumeDelay = hasMultipleVideos ? 1000 : 0;
+		setTimeout(() => {
+			loadingVideo = false;
+			if ($videoActive && $videoPlaying) {
+				player.playVideo();
+			}
+		}, resumeDelay);
+	}
 </script>
 
 <svelte:window on:wheel|passive={onScroll} />
 
 {#if env.PUBLIC_BG_VIDEO_ID}
-	<div 
-		id="bg-video" 
+	<div
+		id="bg-video"
 		class:active={$videoActive}
 		style="--video-blur: {Number(env.PUBLIC_BG_VIDEO_BLUR) || 8}px"
 	>
-		<iframe
-			bind:this={iframeEl}
-			src="https://www.youtube.com/embed/{env.PUBLIC_BG_VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist={env.PUBLIC_BG_VIDEO_ID}&controls=0&rel=0&modestbranding=1&iv_load_policy=3&enablejsapi=1&origin={origin}&playsinline=1"
-			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-			referrerpolicy="strict-origin-when-cross-origin"
-			frameborder="0"
-			title="Background video"
-		></iframe>
+		<div id="bg-video-player"></div>
 	</div>
 {/if}
 
@@ -86,7 +234,7 @@
 			opacity: 1;
 		}
 
-		iframe {
+		#bg-video-player {
 			position: absolute;
 			top: 50%;
 			left: 50%;
@@ -95,8 +243,11 @@
 			height: 56.25vw;
 			min-height: 100vh;
 			min-width: 177.78vh;
-			border: none;
 			filter: blur(var(--video-blur, 8px));
+
+			:global(iframe) {
+				border: none;
+			}
 		}
 	}
 </style>

@@ -116,7 +116,7 @@ Personalization is handled exclusively through .env variables.
 | :--- | :--- | :--- |
 | PUBLIC_CURSOR_NOISE_URL | Texture for cursor trail noise | (S3 URL) |
 | PUBLIC_CURSOR_DIVISOR | Cursor trail follow speed (0.0-1.0) | 0.2 |
-| PUBLIC_BG_VIDEO_ID | Optional YouTube Video ID | dQw4w9WgXcQ |
+| PUBLIC_BG_VIDEO_ID | Optional YouTube Video ID(s), comma-separated for random shuffle. Single video loops; multiple videos auto-advance | dQw4w9WgXcQ |
 | PUBLIC_BG_VIDEO_BLUR | Blur intensity for video (px) | 8 |
 | PUBLIC_BG_VIDEO_VOLUME | Initial video volume (0-100) | 50 |
 

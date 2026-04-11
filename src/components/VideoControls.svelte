@@ -9,7 +9,7 @@
 	} from '@fortawesome/free-solid-svg-icons';
 	import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 	import { env } from '$env/dynamic/public';
-	import { videoPlaying, videoVolume } from '../store/bgvideo';
+	import { videoPlaying, videoVolume, currentVideoId } from '../store/bgvideo';
 
 	$: volumeIcon =
 		$videoVolume === 0 ? faVolumeXmark : $videoVolume < 50 ? faVolumeLow : faVolumeHigh;
@@ -31,12 +31,12 @@
 	{/if}
 
 	<a
-		href="https://www.youtube.com/watch?v={env.PUBLIC_BG_VIDEO_ID}"
+		href="https://www.youtube.com/watch?v={$currentVideoId}"
 		target="_blank"
 		rel="noopener noreferrer"
 		draggable="false"
 		on:dragstart|preventDefault
-		id="yt-link"
+		title="Open on YouTube"
 	>
 		<Fa icon={faYoutube} />
 	</a>
