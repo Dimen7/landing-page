@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/Dimen7/landing-page/compare/v0.1.0...v0.3.0) (2026-05-06)
+
+
+### Features
+
+* add background YouTube video with blur, fade-in on first click, scroll to adjust volume ([a9094ea](https://github.com/Dimen7/landing-page/commit/a9094ea6106949433aba4fcbfdc4989b05383a0b))
+* add vertical glass video controls bar with play/pause, volume slider and scroll sync ([874403e](https://github.com/Dimen7/landing-page/commit/874403e43e42e8a1f58e3feeb050bcd14de2c756))
+* add YouTube link icon to video controls ([3296fc8](https://github.com/Dimen7/landing-page/commit/3296fc8c4fef9d266184fa713741043be58bad0b))
+* CD spin animation, no tilt in corner, glass footer while video plays ([9bb51c9](https://github.com/Dimen7/landing-page/commit/9bb51c9e75c5534897827dac9bd05fb65233124e))
+* dockerize project, rename to landing-page and update documentation ([f71b539](https://github.com/Dimen7/landing-page/commit/f71b539724487ac2e11aebc18be7151919b4ee93))
+* implement youtube iframe api for background video with auto-advance ([739e8cb](https://github.com/Dimen7/landing-page/commit/739e8cbc113cc36b8ebc270c1aa7162f63be5ace))
+* make video blur and initial volume configurable via env vars ([5d011d4](https://github.com/Dimen7/landing-page/commit/5d011d4b38e214b3b818af12baaf403f14354450))
+* toggle video pause on click, show only profile image in corner when video plays ([077b621](https://github.com/Dimen7/landing-page/commit/077b621191542c98deef92acdef31d721a10c947))
+
+
+### Bug Fixes
+
+* hide overflow on body to prevent scrollbar when logo is translated off-screen ([428e471](https://github.com/Dimen7/landing-page/commit/428e471068845162d39d31f0f62741fc2da410b3))
+* **mobile:** stabilize logo and footer animations ([ac58e97](https://github.com/Dimen7/landing-page/commit/ac58e97898d54188e17a7baf140c44817072cc6a))
+* move profile image to top-right corner during video playback ([acbcd40](https://github.com/Dimen7/landing-page/commit/acbcd40dcafe85e034719faad5de88001a567a89))
+* resolve YouTube background video playback on iOS and add mobile dev docs ([fb8dc5d](https://github.com/Dimen7/landing-page/commit/fb8dc5da99bc09fb7901b637168b6a494222beb4))
+* switch to dynamic environment variables for docker runtime support ([93354a5](https://github.com/Dimen7/landing-page/commit/93354a5350f540384dc732000e925a221868f026))
+* update CSP to allow Cloudflare Insights and YouTube ([188f6d2](https://github.com/Dimen7/landing-page/commit/188f6d2752a9dc79a8224485338b1df08dba54e8))
+
 ## [0.2.0](https://github.com/Dimen7/landing-page/compare/v0.1.0...v0.2.0) (2026-04-10)
 
 

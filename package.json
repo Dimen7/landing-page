@@ -1,7 +1,11 @@
 {
 	"name": "landing-page",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"private": true,
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Dimen7/landing-page.git"
+	},
 	"scripts": {
 		"dev": "vite dev --host",
 		"build": "vite build",
