@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.1](https://github.com/Dimen7/landing-page/compare/v0.3.0...v0.3.1) (2026-05-24)
+
+
+### Security & Maintenance
+
+* bump @sveltejs/kit, svelte, vite, sass, eslint, prettier-plugin-svelte and related dev dependencies; resolves transitive devalue (high), svelte (4× XSS/ReDoS) and brace-expansion (moderate) advisories
+* migrate ESLint to flat config (eslint.config.js) for ESLint v10 compatibility
+* add typed declarations for YouTube IFrame and TypeIt globals; install @types/three, @types/youtube, @types/node
+
 ## [0.3.0](https://github.com/Dimen7/landing-page/compare/v0.1.0...v0.3.0) (2026-05-06)
 
 
