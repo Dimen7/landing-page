@@ -4,7 +4,7 @@ import voidAudioUrl from '$lib/assets/void.mp3';
 export { jumpScareUrl, voidAudioUrl };
 
 export function initVoid() {
-	const TypeIt = (window as any).TypeIt;
+	const TypeIt = window.TypeIt;
 
 	const typeItInstance = new TypeIt('#text', {
 		speed: 100,

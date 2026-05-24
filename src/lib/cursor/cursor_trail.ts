@@ -34,7 +34,7 @@ export function initCursorTrail(config: CursorConfig) {
 
 	const loader = new THREE.TextureLoader();
 	loader.setCrossOrigin('anonymous');
-	loader.load(noiseUrl, (texture) => {
+	loader.load(noiseUrl, (texture: THREE.Texture) => {
 		texture.wrapS = THREE.RepeatWrapping;
 		texture.wrapT = THREE.RepeatWrapping;
 		texture.minFilter = THREE.LinearFilter;
@@ -59,7 +59,6 @@ export function initCursorTrail(config: CursorConfig) {
 		};
 
 		const material = new THREE.ShaderMaterial({ uniforms, vertexShader, fragmentShader });
-		(material.extensions as any).derivatives = true;
 
 		scene.add(new THREE.Mesh(geometry, material));
 

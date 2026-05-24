@@ -23,7 +23,9 @@ videoVolume.subscribe((value) => {
 // Get list of all video IDs
 function getAllVideoIds(): string[] {
 	if (!env.PUBLIC_BG_VIDEO_ID) return [];
-	return env.PUBLIC_BG_VIDEO_ID.split(',').map((id) => id.trim()).filter(Boolean);
+	return env.PUBLIC_BG_VIDEO_ID.split(',')
+		.map((id) => id.trim())
+		.filter(Boolean);
 }
 
 // Parse video IDs and pick a random one (never the same as last)
@@ -32,7 +34,8 @@ function getRandomVideoId(): string {
 	if (ids.length === 0) return '';
 	if (ids.length === 1) return ids[0];
 
-	const lastVideoId = typeof window !== 'undefined' ? localStorage.getItem('lastVideoId') || '' : '';
+	const lastVideoId =
+		typeof window !== 'undefined' ? localStorage.getItem('lastVideoId') || '' : '';
 
 	let nextId: string;
 	do {

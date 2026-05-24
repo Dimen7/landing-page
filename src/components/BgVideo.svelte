@@ -1,18 +1,17 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { env } from '$env/dynamic/public';
-	import { videoActive, videoPlaying, videoVolume, currentVideoId, getRandomVideoId, getAllVideoIds } from '../store/bgvideo';
+	import {
+		videoActive,
+		videoPlaying,
+		videoVolume,
+		currentVideoId,
+		getRandomVideoId,
+		getAllVideoIds
+	} from '../store/bgvideo';
 
 	let player: YT.Player | null = null;
 	let playerReady = false;
-
-	// YouTube IFrame API types
-	declare global {
-		interface Window {
-			YT: any;
-			onYouTubeIframeAPIReady: () => void;
-		}
-	}
 
 	function initYouTubeAPI() {
 		if (typeof window === 'undefined' || window.YT) return;
@@ -55,7 +54,7 @@
 		});
 	}
 
-	function onPlayerReady(event: any) {
+	function onPlayerReady(event: YT.PlayerEvent) {
 		playerReady = true;
 		// If we are already active/playing, start video and unmute
 		if ($videoActive && $videoPlaying) {
@@ -66,7 +65,7 @@
 		}
 	}
 
-	function onPlayerStateChange(event: any) {
+	function onPlayerStateChange(event: YT.OnStateChangeEvent) {
 		const state = event.data;
 		const videoIds = getAllVideoIds();
 
@@ -82,7 +81,7 @@
 				}, 500);
 			} else if (videoIds.length === 1 && player) {
 				// Single video - replay from start
-				player.seekTo(0);
+				player.seekTo(0, true);
 				if ($videoActive && $videoPlaying) {
 					player.playVideo();
 				}
@@ -93,7 +92,7 @@
 		}
 	}
 
-	function onPlayerError(event: any) {
+	function onPlayerError(event: YT.OnErrorEvent) {
 		console.error('YouTube player error:', event.data);
 	}
 
@@ -109,7 +108,7 @@
 		if (!$videoActive) {
 			videoActive.set(true);
 			videoPlaying.set(true);
-			
+
 			// IMMEDIATE UNMUTE for iOS gesture unlock
 			if (player && playerReady) {
 				player.unMute();
@@ -118,7 +117,7 @@
 		} else {
 			const next = !$videoPlaying;
 			videoPlaying.set(next);
-			
+
 			if (player && playerReady) {
 				if (next) {
 					player.playVideo();
@@ -213,17 +212,27 @@
 	}
 
 	// Load new video when currentVideoId changes
-	$: if (player && playerReady && $currentVideoId && $currentVideoId !== lastLoadedVideoId && !loadingVideo) {
+	$: if (
+		player &&
+		playerReady &&
+		$currentVideoId &&
+		$currentVideoId !== lastLoadedVideoId &&
+		!loadingVideo
+	) {
+		// eslint-disable-next-line no-useless-assignment
 		loadingVideo = true;
+		// eslint-disable-next-line no-useless-assignment
 		lastLoadedVideoId = $currentVideoId;
 
-		player.loadVideoById($currentVideoId);
+		const activePlayer = player;
+		activePlayer.loadVideoById($currentVideoId);
 
 		setTimeout(() => {
+			// eslint-disable-next-line svelte/infinite-reactive-loop
 			loadingVideo = false;
 			if ($videoActive && $videoPlaying) {
-				player.playVideo();
-				player.unMute();
+				activePlayer.playVideo();
+				activePlayer.unMute();
 			}
 		}, 500);
 	}

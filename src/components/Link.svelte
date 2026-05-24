@@ -5,7 +5,7 @@
 	export let newTab: boolean = true;
 </script>
 
-<!-- svelte-ignore a11y_mouse_events_have_key_events -->
+<!-- eslint-disable svelte/no-navigation-without-resolve -->
 <a
 	on:mouseenter|passive={() => scale.set(-0.6)}
 	on:mouseleave|passive={() => scale.set(0)}
@@ -17,6 +17,8 @@
 >
 	<slot />
 </a>
+
+<!-- eslint-enable svelte/no-navigation-without-resolve -->
 
 <style lang="scss">
 	@use '../styles/link' as *;

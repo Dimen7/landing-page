@@ -8,62 +8,62 @@ Example: `PUBLIC_SOCIAL_GITHUB="https://github.com/yourprofile"`
 
 These icons are suitable for general links like email, websites, or professional information.
 
-| Identifier | Icon Category |
-| :--- | :--- |
-| `MAIL` / `ENVELOPE` | Email / Envelope |
-| `KEY` / `GPG` | Security / Encryption |
-| `GLOBE` / `WEBSITE` | General Web / Globe |
-| `LINK` | Generic Link |
-| `PHONE` | Telephone |
-| `USER` | Profile / User |
-| `CODE` | Programming / Repository |
-| `BOOK` | Books / Documentation |
-| `UNIVERSITY` / `EDUCATION` | Education / Academy |
-| `WORK` | Professional / Portfolio |
-| `CHESS` / `LICHESS` | Chess / Gaming |
-| `GAMEPAD` / `OSU` | Gaming / Controller |
-| `INFO` | Information / About |
+| Identifier                 | Icon Category            |
+| :------------------------- | :----------------------- |
+| `MAIL` / `ENVELOPE`        | Email / Envelope         |
+| `KEY` / `GPG`              | Security / Encryption    |
+| `GLOBE` / `WEBSITE`        | General Web / Globe      |
+| `LINK`                     | Generic Link             |
+| `PHONE`                    | Telephone                |
+| `USER`                     | Profile / User           |
+| `CODE`                     | Programming / Repository |
+| `BOOK`                     | Books / Documentation    |
+| `UNIVERSITY` / `EDUCATION` | Education / Academy      |
+| `WORK`                     | Professional / Portfolio |
+| `CHESS` / `LICHESS`        | Chess / Gaming           |
+| `GAMEPAD` / `OSU`          | Gaming / Controller      |
+| `INFO`                     | Information / About      |
 
 ## Brand Icons
 
 These icons represent specific platforms and services.
 
-| Identifier | Service |
-| :--- | :--- |
-| `AMAZON` | Amazon |
-| `APPLE` | Apple |
-| `BEHANCE` | Behance |
-| `BITBUCKET` | Bitbucket |
-| `DISCORD` | Discord |
-| `DRIBBBLE` | Dribbble |
-| `FACEBOOK` | Facebook |
-| `FIGMA` | Figma |
-| `FLICKR` | Flickr |
-| `GITLAB` | GitLab |
-| `GITHUB` | GitHub |
-| `GOOGLE` | Google |
-| `INSTAGRAM` | Instagram |
-| `ITCHIO` | Itch.io |
-| `LINKEDIN` | LinkedIn |
-| `MASTODON` | Mastodon |
-| `MEDIUM` | Medium |
-| `MICROSOFT` | Microsoft |
-| `PATREON` | Patreon |
-| `PAYPAL` | PayPal |
-| `PINTEREST` | Pinterest |
-| `PLAYSTATION` | PlayStation |
-| `REDDIT` | Reddit |
-| `SNAPCHAT` | Snapchat |
-| `SPOTIFY` | Spotify |
+| Identifier      | Service        |
+| :-------------- | :------------- |
+| `AMAZON`        | Amazon         |
+| `APPLE`         | Apple          |
+| `BEHANCE`       | Behance        |
+| `BITBUCKET`     | Bitbucket      |
+| `DISCORD`       | Discord        |
+| `DRIBBBLE`      | Dribbble       |
+| `FACEBOOK`      | Facebook       |
+| `FIGMA`         | Figma          |
+| `FLICKR`        | Flickr         |
+| `GITLAB`        | GitLab         |
+| `GITHUB`        | GitHub         |
+| `GOOGLE`        | Google         |
+| `INSTAGRAM`     | Instagram      |
+| `ITCHIO`        | Itch.io        |
+| `LINKEDIN`      | LinkedIn       |
+| `MASTODON`      | Mastodon       |
+| `MEDIUM`        | Medium         |
+| `MICROSOFT`     | Microsoft      |
+| `PATREON`       | Patreon        |
+| `PAYPAL`        | PayPal         |
+| `PINTEREST`     | Pinterest      |
+| `PLAYSTATION`   | PlayStation    |
+| `REDDIT`        | Reddit         |
+| `SNAPCHAT`      | Snapchat       |
+| `SPOTIFY`       | Spotify        |
 | `STACKOVERFLOW` | Stack Overflow |
-| `STEAM` | Steam |
-| `TELEGRAM` | Telegram |
-| `TIKTOK` | TikTok |
-| `TWITCH` | Twitch |
-| `TWITTER` / `X` | Twitter / X |
-| `WHATSAPP` | WhatsApp |
-| `XBOX` | Xbox |
-| `YOUTUBE` | YouTube |
+| `STEAM`         | Steam          |
+| `TELEGRAM`      | Telegram       |
+| `TIKTOK`        | TikTok         |
+| `TWITCH`        | Twitch         |
+| `TWITTER` / `X` | Twitter / X    |
+| `WHATSAPP`      | WhatsApp       |
+| `XBOX`          | Xbox           |
+| `YOUTUBE`       | YouTube        |
 
 ## Fallback
 

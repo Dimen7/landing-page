@@ -28,12 +28,10 @@
 <div class="void-wrapper">
 	<div id="welcome-page">Click to enter. You comply to do this at your own risk.</div>
 	<div id="shine"></div>
-	<!-- svelte-ignore a11y_media_has_caption -->
 	<video hidden id="jump-scare">
 		<source src={jumpScareUrl} type="video/mp4" />
 	</video>
 	<div id="text"></div>
-	<!-- svelte-ignore a11y_media_has_caption -->
 	<audio id="audio" loop src={voidAudioUrl}></audio>
 </div>
 

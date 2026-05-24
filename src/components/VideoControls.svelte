@@ -8,7 +8,6 @@
 		faVolumeXmark
 	} from '@fortawesome/free-solid-svg-icons';
 	import { faYoutube } from '@fortawesome/free-brands-svg-icons';
-	import { env } from '$env/dynamic/public';
 	import { videoPlaying, videoVolume, currentVideoId } from '../store/bgvideo';
 
 	$: volumeIcon =
@@ -31,6 +30,7 @@
 	{/if}
 
 	<a
+		id="yt-link"
 		href="https://www.youtube.com/watch?v={$currentVideoId}"
 		target="_blank"
 		rel="noopener noreferrer"

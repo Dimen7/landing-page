@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { env } from '$env/dynamic/public';
 	import Social from './Social.svelte';
+	import type { IconDefinition } from '@fortawesome/free-brands-svg-icons';
 	import {
 		faEnvelope,
 		faKey,
@@ -53,7 +54,7 @@
 		faPlaystation
 	} from '@fortawesome/free-brands-svg-icons';
 
-	const iconMap: Record<string, any> = {
+	const iconMap: Record<string, IconDefinition> = {
 		// Solid / General
 		MAIL: faEnvelope,
 		ENVELOPE: faEnvelope,
@@ -122,9 +123,9 @@
 			const faIcon = iconMap[name] || faLink; // Fallback to a generic link icon
 			return { faIcon, link: value };
 		})
-		.filter((s) => s !== null) as { faIcon: any; link: string }[];
+		.filter((s) => s !== null) as { faIcon: IconDefinition; link: string }[];
 </script>
 
-{#each socialEntries as social}
+{#each socialEntries as social (social.link)}
 	<Social faIcon={social.faIcon} link={social.link} />
 {/each}

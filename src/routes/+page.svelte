@@ -34,7 +34,7 @@
 		if (!isNaN(birthdayDate.getTime())) {
 			age = Math.floor((Date.now() - birthdayDate.getTime()) / 3.15576e10);
 		}
-	} catch (e) {
+	} catch {
 		// Fallback for invalid/empty date
 	}
 
@@ -65,7 +65,6 @@
 <BgVideo />
 
 <main class:hovered class:video-playing={$videoPlaying} bind:this={mainEl}>
-	<!-- svelte-ignore a11y_mouse_events_have_key_events -->
 	<div id="rotating-image">
 		<img
 			bind:this={imgEl}
@@ -116,7 +115,9 @@
 		{/if}
 		<span id="footer-bio">
 			{#if age > 0}{age} {env.PUBLIC_AGE_SUFFIX || 'years old'}{/if}
-			{#if age > 0 && env.PUBLIC_BIO} &middot; {/if}
+			{#if age > 0 && env.PUBLIC_BIO}
+				&middot;
+			{/if}
 			{env.PUBLIC_BIO || 'Loading bio...'}
 		</span>
 		<ul>

@@ -35,18 +35,21 @@ This project is a fork of the original [osumatrix.me](https://github.com/oSumAtr
 ### Local Development
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/Dimen7/landing-page.git
    cd landing-page
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    ```
 
 3. Configure environment:
    Copy the example environment file and adjust the values:
+
    ```bash
    cp .env.example .env
    ```
@@ -90,6 +93,7 @@ If your YouTube background video shows "Video not available" after deploying wit
 The project uses a multi-stage Docker build and the SvelteKit Node adapter.
 
 1. Start the container:
+
    ```bash
    docker compose up -d
    ```
@@ -121,40 +125,44 @@ The image is automatically built and pushed on every push to the `main` branch.
 Personalization is handled exclusively through .env variables.
 
 ### General Information
-| Variable | Description | Default/Example |
-| :--- | :--- | :--- |
-| PUBLIC_NAME | Your name or handle (main title) | John Doe |
-| PUBLIC_DESCRIPTION | Meta description for SEO | My personal portfolio |
-| PUBLIC_THEME_COLOR | Mobile browser status bar color | #000000 |
-| PUBLIC_IMAGE | URL for profile image | (Auto-generated avatar) |
-| PUBLIC_FAVICON | URL for favicon | (Auto-generated favicon) |
+
+| Variable           | Description                      | Default/Example          |
+| :----------------- | :------------------------------- | :----------------------- |
+| PUBLIC_NAME        | Your name or handle (main title) | John Doe                 |
+| PUBLIC_DESCRIPTION | Meta description for SEO         | My personal portfolio    |
+| PUBLIC_THEME_COLOR | Mobile browser status bar color  | #000000                  |
+| PUBLIC_IMAGE       | URL for profile image            | (Auto-generated avatar)  |
+| PUBLIC_FAVICON     | URL for favicon                  | (Auto-generated favicon) |
 
 ### Theme & Colors (CSS)
-| Variable | Description | Default/Example |
-| :--- | :--- | :--- |
-| PUBLIC_COLOR_WHITE | Main text color | #cccccc |
-| PUBLIC_COLOR_GRAY | Secondary color (scrollbars, etc.) | #333333 |
-| PUBLIC_COLOR_HIGHLIGHT | Accent and cursor glow color | #ff0052 |
-| PUBLIC_COLOR_BG | Main background color | #060606 |
+
+| Variable               | Description                        | Default/Example |
+| :--------------------- | :--------------------------------- | :-------------- |
+| PUBLIC_COLOR_WHITE     | Main text color                    | #cccccc         |
+| PUBLIC_COLOR_GRAY      | Secondary color (scrollbars, etc.) | #333333         |
+| PUBLIC_COLOR_HIGHLIGHT | Accent and cursor glow color       | #ff0052         |
+| PUBLIC_COLOR_BG        | Main background color              | #060606         |
 
 ### Visual Effects & Cursor
-| Variable | Description | Default/Example |
-| :--- | :--- | :--- |
-| PUBLIC_CURSOR_NOISE_URL | Texture for cursor trail noise | (S3 URL) |
-| PUBLIC_CURSOR_DIVISOR | Cursor trail follow speed (0.0-1.0) | 0.2 |
-| PUBLIC_BG_VIDEO_ID | Optional YouTube Video ID(s), comma-separated for random shuffle. Single video loops; multiple videos auto-advance | dQw4w9WgXcQ |
-| PUBLIC_BG_VIDEO_BLUR | Blur intensity for video (px) | 8 |
-| PUBLIC_BG_VIDEO_VOLUME | Initial video volume (0-100) | 50 |
+
+| Variable                | Description                                                                                                        | Default/Example |
+| :---------------------- | :----------------------------------------------------------------------------------------------------------------- | :-------------- |
+| PUBLIC_CURSOR_NOISE_URL | Texture for cursor trail noise                                                                                     | (S3 URL)        |
+| PUBLIC_CURSOR_DIVISOR   | Cursor trail follow speed (0.0-1.0)                                                                                | 0.2             |
+| PUBLIC_BG_VIDEO_ID      | Optional YouTube Video ID(s), comma-separated for random shuffle. Single video loops; multiple videos auto-advance | dQw4w9WgXcQ     |
+| PUBLIC_BG_VIDEO_BLUR    | Blur intensity for video (px)                                                                                      | 8               |
+| PUBLIC_BG_VIDEO_VOLUME  | Initial video volume (0-100)                                                                                       | 50              |
 
 ### Localization & Bio
-| Variable | Description | Default/Example |
-| :--- | :--- | :--- |
-| PUBLIC_BIO | Your main introduction text | I am a software engineer... |
-| PUBLIC_LOCATION | Your physical location | the Internet |
-| PUBLIC_BIRTHDAY | Your birthday (YYYY-MM-DD) | 2000-01-01 |
-| PUBLIC_AGE_SUFFIX | Text after age | years old |
-| PUBLIC_LOCALE | Locale for date formatting | en-US |
-| PUBLIC_TIMEZONE | Timezone for the clock | UTC |
+
+| Variable          | Description                 | Default/Example             |
+| :---------------- | :-------------------------- | :-------------------------- |
+| PUBLIC_BIO        | Your main introduction text | I am a software engineer... |
+| PUBLIC_LOCATION   | Your physical location      | the Internet                |
+| PUBLIC_BIRTHDAY   | Your birthday (YYYY-MM-DD)  | 2000-01-01                  |
+| PUBLIC_AGE_SUFFIX | Text after age              | years old                   |
+| PUBLIC_LOCALE     | Locale for date formatting  | en-US                       |
+| PUBLIC_TIMEZONE   | Timezone for the clock      | UTC                         |
 
 ### Social Media Links
 
