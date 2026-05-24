@@ -27,6 +27,7 @@
 
 	onMount(() => {
 		if (window.innerWidth <= 500) return;
+		if (!env.PUBLIC_CURSOR_NOISE_URL) return;
 
 		// Initialize cursor trail (three.js bundled via npm)
 		initCursorTrail({

@@ -30,7 +30,7 @@
 
 	let age = 0;
 	try {
-		const birthdayDate = new Date(env.PUBLIC_BIRTHDAY);
+		const birthdayDate = new Date(env.PUBLIC_BIRTHDAY ?? '');
 		if (!isNaN(birthdayDate.getTime())) {
 			age = Math.floor((Date.now() - birthdayDate.getTime()) / 3.15576e10);
 		}
