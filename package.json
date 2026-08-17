@@ -15,11 +15,12 @@
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
 		"verify": "pnpm run check && pnpm run lint && pnpm run build",
-		"release": "standard-version"
+		"release": "release-it"
 	},
 	"packageManager": "pnpm@11.22.0",
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
+		"@release-it/conventional-changelog": "^11.0.1",
 		"@sveltejs/adapter-node": "^5.5.7",
 		"@sveltejs/adapter-static": "3.0.10",
 		"@sveltejs/kit": "2.70.2",
@@ -35,7 +36,7 @@
 		"globals": "^17.8.0",
 		"prettier": "3.9.6",
 		"prettier-plugin-svelte": "4.1.1",
-		"standard-version": "^9.5.0",
+		"release-it": "^20.2.1",
 		"svelte": "^5.56.8",
 		"svelte-check": "4.7.3",
 		"svelte-eslint-parser": "^1.8.1",
