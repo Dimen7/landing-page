@@ -1,5 +1,36 @@
 # Changelog
 
+All notable changes to this project are documented here.
+Format follows [Conventional Commits](https://www.conventionalcommits.org/).
+
+
+## [0.3.2](https://github.com/Dimen7/landing-page/compare/v0.3.1...v0.3.2) (2026-08-17)
+
+### Bug Fixes
+
+* **types:** guard PUBLIC_* env access for CI without .env ([d65eb66](https://github.com/Dimen7/landing-page/commit/d65eb66b2e61a75ee1d546428e3dd876cdf8b1ca))
+
+### Maintenance
+
+* **deps:** bump actions/checkout from 4 to 6 ([#1](https://github.com/Dimen7/landing-page/issues/1)) ([ee4eb42](https://github.com/Dimen7/landing-page/commit/ee4eb42d159fef62a45f46e05ab42394c61c602f))
+* **deps:** bump actions/setup-node from 4 to 6 ([#2](https://github.com/Dimen7/landing-page/issues/2)) ([ffb2e20](https://github.com/Dimen7/landing-page/commit/ffb2e20f9f98f8a77adc1f13f63fdc5f62a87f5a))
+* **deps:** bump docker/build-push-action from 5 to 7 ([#3](https://github.com/Dimen7/landing-page/issues/3)) ([8685a65](https://github.com/Dimen7/landing-page/commit/8685a658712cd1483010c4a4a5b469532f80e310))
+* **deps:** bump docker/login-action from 3 to 4 ([#4](https://github.com/Dimen7/landing-page/issues/4)) ([fc0885f](https://github.com/Dimen7/landing-page/commit/fc0885fcc466ce534648c868b2bae0e0d74d209d))
+* **deps:** bump docker/metadata-action from 5 to 6 ([#5](https://github.com/Dimen7/landing-page/issues/5)) ([4e1517c](https://github.com/Dimen7/landing-page/commit/4e1517c97d19c82f82de3bdc3a33320d6893a04f))
+* **ci:** add Dependabot config, CI verification workflow and verify script ([3887a57](https://github.com/Dimen7/landing-page/commit/3887a57114ec7de7149f4bb89436a28e44b36fd8))
+* **ci:** bump the actions group across 1 directory with 2 updates ([#19](https://github.com/Dimen7/landing-page/issues/19)) ([bcc5aa8](https://github.com/Dimen7/landing-page/commit/bcc5aa818c69c46bf4ce73141fbab42eb56f07a9))
+* **deps:** bump @sveltejs/kit from 2.70.1 to 2.70.2 ([#20](https://github.com/Dimen7/landing-page/issues/20)) ([8824ea3](https://github.com/Dimen7/landing-page/commit/8824ea34ce8e5685523e9457bdc3a276a4659630))
+* **deps:** bump @types/node from 25.9.2 to 26.2.0 ([#12](https://github.com/Dimen7/landing-page/issues/12)) ([7975e0c](https://github.com/Dimen7/landing-page/commit/7975e0cfda1025e2f1864cad4c9a1cf127a43f4a))
+* **deps:** bump brace-expansion from 1.1.13 to 1.1.18 ([#22](https://github.com/Dimen7/landing-page/issues/22)) ([5eebdb2](https://github.com/Dimen7/landing-page/commit/5eebdb23f405021b4acbe2d527ae1f549dc479a2))
+* **deps:** bump immutable from 5.1.5 to 5.1.9 ([#16](https://github.com/Dimen7/landing-page/issues/16)) ([41ee22c](https://github.com/Dimen7/landing-page/commit/41ee22cb54d01a91f69b47960cd1755f63c8ab36))
+* **deps:** bump the minor-and-patch group across 1 directory with 18 updates ([#17](https://github.com/Dimen7/landing-page/issues/17)) ([0b81218](https://github.com/Dimen7/landing-page/commit/0b8121873f7327e2e49db10d5317dff3d08f3c7c))
+* **deps:** bump the minor-and-patch group across 1 directory with 2 updates ([#7](https://github.com/Dimen7/landing-page/issues/7)) ([b535937](https://github.com/Dimen7/landing-page/commit/b5359374ff54d580dcfa188757cceb94c819fc58))
+* **deps:** bump the minor-and-patch group across 1 directory with 9 updates ([#10](https://github.com/Dimen7/landing-page/issues/10)) ([2191dad](https://github.com/Dimen7/landing-page/commit/2191dade390fa442710c54e5124b5aa6fa0e2a2e))
+* **deps:** bump the minor-and-patch group with 9 updates ([b217b14](https://github.com/Dimen7/landing-page/commit/b217b14cd6d33dbd81a1cf295a499159df52e1b0)), closes [#6](https://github.com/Dimen7/landing-page/issues/6)
+* **deps:** bump the minor-and-patch group with 9 updates ([#8](https://github.com/Dimen7/landing-page/issues/8)) ([0d0774b](https://github.com/Dimen7/landing-page/commit/0d0774bfa4dd9d0117505922933b79778ba7162f))
+
+# Changelog
+
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
 ### [0.3.1](https://github.com/Dimen7/landing-page/compare/v0.3.0...v0.3.1) (2026-05-24)
