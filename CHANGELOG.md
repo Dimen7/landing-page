@@ -4,6 +4,13 @@ All notable changes to this project are documented here.
 Format follows [Conventional Commits](https://www.conventionalcommits.org/).
 
 
+## [0.3.4](https://github.com/Dimen7/landing-page/compare/v0.3.3...v0.3.4) (2026-09-18)
+
+### Maintenance
+
+* **deps:** bump release-it from 20.2.1 to 21.0.3 ([#28](https://github.com/Dimen7/landing-page/issues/28)) ([1344485](https://github.com/Dimen7/landing-page/commit/13444859a2edca3b1a3abe6d8763920271b04a53))
+* **deps:** bump the minor-and-patch group with 6 updates ([#27](https://github.com/Dimen7/landing-page/issues/27)) ([4dfe4e9](https://github.com/Dimen7/landing-page/commit/4dfe4e9425e382008f64b3538f7db5f51215ae31))
+
 ## [0.3.3](https://github.com/Dimen7/landing-page/compare/v0.3.2...v0.3.3) (2026-09-11)
 
 ### Maintenance
