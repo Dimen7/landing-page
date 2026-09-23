@@ -4,6 +4,12 @@ All notable changes to this project are documented here.
 Format follows [Conventional Commits](https://www.conventionalcommits.org/).
 
 
+## [0.3.5](https://github.com/Dimen7/landing-page/compare/v0.3.4...v0.3.5) (2026-09-23)
+
+### Maintenance
+
+* **deps:** bump the minor-and-patch group with 5 updates ([#29](https://github.com/Dimen7/landing-page/issues/29)) ([75b1449](https://github.com/Dimen7/landing-page/commit/75b14493662a266e192a74eb210ff1524d850547))
+
 ## [0.3.4](https://github.com/Dimen7/landing-page/compare/v0.3.3...v0.3.4) (2026-09-18)
 
 ### Maintenance
